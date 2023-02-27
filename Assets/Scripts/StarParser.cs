@@ -140,7 +140,7 @@ public class StarParser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ParseSystemData();
     }
 
     // Update is called once per frame
@@ -153,6 +153,7 @@ public class StarParser : MonoBehaviour
     public void ParseSystemData()
     {
         StartCoroutine(ReadStarDataCsv());
+        StartCoroutine(SpawnPlanets());
     }
     
     public IEnumerator ReadStarDataCsv()
@@ -282,5 +283,28 @@ public class StarParser : MonoBehaviour
         }
 
         return null;
+    }
+
+    public IEnumerator SpawnPlanets()
+    {
+        if (inProgress)
+        {
+            yield return null;
+        }
+
+        inProgress = true;
+        foreach (StarCluster cluster in starClusters)
+        {
+            GameObject c = Instantiate(clusterPrefab);
+            foreach (Star star in cluster.stars)
+            {
+                Vector3 pos = new Vector3(star.x, star.y, 0);
+                GameObject s = Instantiate(starPrefab, pos, Quaternion.identity);
+                s.transform.parent = c.transform;
+            }
+        }
+
+        inProgress = false;
+        yield return null;
     }
 }
