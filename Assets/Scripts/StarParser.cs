@@ -153,7 +153,7 @@ public class StarParser : MonoBehaviour
     public void ParseSystemData()
     {
         StartCoroutine(ReadStarDataCsv());
-        StartCoroutine(SpawnPlanets());
+        // StartCoroutine(SpawnPlanets());
     }
     
     public IEnumerator ReadStarDataCsv()
@@ -227,9 +227,11 @@ public class StarParser : MonoBehaviour
         }
         
         SeparateMoons();
-        
-        inProgress = false;
         Debug.Log("Done parsing and sorting");
+        SpawnPlanets();
+        Debug.Log("Done rendering");
+        inProgress = false;
+
         yield return null;
     }
 
@@ -285,14 +287,8 @@ public class StarParser : MonoBehaviour
         return null;
     }
 
-    public IEnumerator SpawnPlanets()
+    public void SpawnPlanets()
     {
-        if (inProgress)
-        {
-            yield return null;
-        }
-
-        inProgress = true;
         foreach (StarCluster cluster in starClusters)
         {
             GameObject c = Instantiate(clusterPrefab);
@@ -303,8 +299,5 @@ public class StarParser : MonoBehaviour
                 s.transform.parent = c.transform;
             }
         }
-
-        inProgress = false;
-        yield return null;
     }
 }
