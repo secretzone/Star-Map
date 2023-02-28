@@ -36,12 +36,20 @@ public class Planet : MonoBehaviour
         this.planetName = planetName;
     }
 
-    public void AddMoon(Planet moon)
+    public void EnableMoons(bool enabled)
     {
-        moon.transform.parent = transform;
-        moon.isMoon = true;
-        moons.Add(moon);
+        foreach (Planet moon in moons)
+        {
+            moon.gameObject.SetActive(enabled);
+        }
     }
+
+    // public void AddMoon(Planet moon)
+    // {
+    //     moon.transform.parent = transform;
+    //     moon.isMoon = true;
+    //     moons.Add(moon);
+    // }
 
     public void Initialize(Star star)
     {

@@ -147,7 +147,7 @@ public class StarParser : MonoBehaviour
 
         SeparateMoons();
         Debug.Log("Done parsing and sorting");
-        // SpawnPlanets();
+        EnablePlanets(false);
         Debug.Log("Done rendering");
         inProgress = false;
 
@@ -206,16 +206,17 @@ public class StarParser : MonoBehaviour
         return null;
     }
 
-    public void SpawnPlanets()
+    public void EnablePlanets(bool enabled)
     {
         foreach (Cluster cluster in starClusters)
         {
-            GameObject c = Instantiate(clusterPrefab);
             foreach (Star star in cluster.stars)
             {
-                Vector3 pos = new Vector3(star.x, star.y, 0);
-                GameObject s = Instantiate(starPrefab, pos, Quaternion.identity);
-                s.transform.parent = c.transform;
+                foreach (Planet planet in star.planets)
+                {
+                    planet.EnableMoons(enabled);
+                    planet.gameObject.SetActive(enabled);
+                }
             }
         }
     }

@@ -6,11 +6,11 @@ using UnityEngine.Serialization;
 public class Cluster : MonoBehaviour
 {
     public string clusterName;
-    public List<Star> stars;
+    public List<Star> stars = new List<Star>();
 
     void Start()
     {
-        stars = new List<Star>();
+        
     }
     
     public Cluster(string clusterName)
