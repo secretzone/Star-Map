@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class StarParser : MonoBehaviour
 {
@@ -18,10 +17,10 @@ public class StarParser : MonoBehaviour
     enum Columns
     {
         Cluster = 0,
-        Index,
+        Index, //always null
         Star,
         X,
-        Y,	
+        Y,
         DistSol,
         StarColor,
         StarSize,
@@ -47,115 +46,23 @@ public class StarParser : MonoBehaviour
         LifeChance,
         DistFromStar
     }
-    
-    [Serializable]
-    public class StarCluster
-    {
-        public String name;
-        public List<Star> stars = new List<Star>();
 
-        public StarCluster(String name)
-        {
-            this.name = name;
-        }
+    public List<Cluster> starClusters;
 
-        public Star GetStarByName(String starName)
-        {
-            foreach (Star star in stars)
-            {
-                if (star.name == starName)
-                {
-                    return star;
-                }
-            }
-
-            return null;
-        }
-        
-    }
-
-    [Serializable]
-    public class Star
-    {
-        public string name;
-        public float x;
-        public float y;
-        public string size;
-        public string color;
-        public List<Planet> planets = new List<Planet>();
-
-        public Star(String name)
-        {
-            this.name = name;
-        }
-
-        public Planet GetPlanetByName(string planetName)
-        {
-            foreach (Planet planet in planets)
-            {
-                if (planet.name == planetName)
-                {
-                    return planet;
-                }
-            }
-
-            return null;
-        }
-    }
-
-    [Serializable]
-    public class Planet
-    {
-        public string name; //III, IV, etc
-        public string type;
-        public int hazard;
-        public int tectonics;
-        public int weather;
-        public int thermal;
-        public int bioUnits;
-        public int minValue;
-        public int minVolume;
-        public float fuel;
-        public int axialTilt;
-        public int density;
-        public int radius;
-        public int gravity;
-        public int temperature;
-        public int day;
-        public int atmosphere;
-        public int lifeChance;
-        public int distFromStar;
-
-        public List<Planet> children = new List<Planet>();
-        public Planet(String name)
-        {
-            this.name = name;
-        }
-
-    }
-
-    public List<StarCluster> starClusters;
-    
     public TextAsset systemsCsv;
+
     // Start is called before the first frame update
     void Start()
     {
         ParseSystemData();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public void ParseSystemData()
     {
         StartCoroutine(ReadStarDataCsv());
         // StartCoroutine(SpawnPlanets());
     }
-    
+
     public IEnumerator ReadStarDataCsv()
     {
         if (inProgress)
@@ -164,71 +71,83 @@ public class StarParser : MonoBehaviour
         }
 
         inProgress = true;
-        starClusters = new List<StarCluster>();
+        starClusters = new List<Cluster>();
         var dataset = systemsCsv;
         var dataLines = dataset.text.Split('\n'); // Split also works with simple arguments, no need to pass char[]
-        
-        for(int i = 1; i < dataLines.Length; i++) {
-            var data = dataLines[i].Split(',');
 
-            //CLUSTER
-            String clusterName = data[(int) Columns.Cluster];
-            StarCluster cluster = GetClusterByName(clusterName);
-            if (cluster == null)
+        for (int i = 1; i < dataLines.Length; i++)
+        {
+            try
             {
-                cluster = new StarCluster(clusterName);
-                starClusters.Add(cluster);
+                var data = dataLines[i].Split(',');
+
+                //CLUSTER
+                String clusterName = data[(int) Columns.Cluster];
+                Cluster cluster = GetClusterByName(clusterName);
+                if (cluster == null)
+                {
+                    cluster = Instantiate(clusterPrefab).GetComponent<Cluster>();
+                    cluster.clusterName = clusterName;
+                    cluster.Initialize(gameObject);
+                    starClusters.Add(cluster);
+                }
+
+                //STARS
+                String starName = data[(int) Columns.Star]; //Prime, Alpha, etc
+                Star star = cluster.GetStarByName(starName);
+                if (star == null)
+                {
+                    star = Instantiate(starPrefab).GetComponent<Star>();
+                    star.starName = starName;
+                    star.x = float.Parse(data[(int) Columns.X]);
+                    star.y = float.Parse(data[(int) Columns.Y]);
+                    star.color = data[(int) Columns.StarColor];
+                    star.size = data[(int) Columns.StarSize];
+                    star.distSol = float.Parse(data[(int) Columns.DistSol]);
+                    star.fleet = data[(int) Columns.Fleet];
+                    star.Initialize(cluster);
+                    cluster.stars.Add(star);
+                }
+
+                //PLANETS
+                String planetName = data[(int) Columns.Planet];
+                Planet planet = star.GetPlanetByName(planetName);
+                if (planet == null)
+                {
+                    planet = Instantiate(planetPrefab).GetComponent<Planet>();
+                    planet.planetName = planetName;
+                    planet.atmosphere = Convert.ToInt32(data[(int) Columns.Atmosphere]);
+                    planet.day = Convert.ToInt32(data[(int) Columns.Day]);
+                    planet.density = Convert.ToInt32(data[(int) Columns.Density]);
+                    planet.fuel = float.Parse(data[(int) Columns.Fuel]);
+                    planet.gravity = Convert.ToInt32(data[(int) Columns.Gravity]);
+                    planet.hazard = Convert.ToInt32(data[(int) Columns.Hazard]);
+                    planet.radius = Convert.ToInt32(data[(int) Columns.Radius]);
+                    planet.tectonics = Convert.ToInt32(data[(int) Columns.Tectonics]);
+                    planet.temperature = Convert.ToInt32(data[(int) Columns.Temp]);
+                    planet.thermal = Convert.ToInt32(data[(int) Columns.Thermal]);
+                    planet.type = data[(int) Columns.Type];
+                    planet.weather = Convert.ToInt32(data[(int) Columns.Weather]);
+                    planet.axialTilt = Convert.ToInt32(data[(int) Columns.AxialTilt]);
+                    planet.bioUnits = Convert.ToInt32(data[(int) Columns.BioUnits]);
+                    planet.lifeChance = Convert.ToInt32(data[(int) Columns.LifeChance]);
+                    planet.minValue = Convert.ToInt32(data[(int) Columns.MinValue]);
+                    planet.minVolume = Convert.ToInt32(data[(int) Columns.MinVolume]);
+                    planet.distFromStar = Convert.ToInt32(data[(int) Columns.DistFromStar]);
+                    planet.bioHazard = Convert.ToInt32(data[(int) Columns.BioHazard]);
+                    planet.Initialize(star);
+                    star.planets.Add(planet);
+                }
             }
-            
-            //STARS
-            String starName = data[(int) Columns.Star]; //Prime, Alpha, etc
-            Star star = cluster.GetStarByName(starName);
-            if (star == null)
+            catch (Exception e)
             {
-                star = new Star(starName);
-                star.x = float.Parse(data[(int) Columns.X]);
-                star.y = float.Parse(data[(int) Columns.Y]);
-                star.color = data[(int) Columns.StarColor];
-                star.size = data[(int) Columns.StarSize];
-                cluster.stars.Add(star);
+                Debug.Log($"{e.Message}:{dataLines[i]}");
             }
-            
-            //PLANETS
-            String planetName = data[(int) Columns.Planet];
-            Planet planet = star.GetPlanetByName(planetName);
-            if (planet == null)
-            {
-                planet = new Planet(planetName);
-                planet.atmosphere = Convert.ToInt32(data[(int) Columns.Atmosphere]);
-                planet.day = Convert.ToInt32(data[(int) Columns.Day]);
-                planet.density = Convert.ToInt32(data[(int) Columns.Density]);
-                planet.fuel = float.Parse(data[(int) Columns.Fuel]);
-                planet.gravity = Convert.ToInt32(data[(int) Columns.Gravity]);
-                planet.hazard = Convert.ToInt32(data[(int) Columns.Hazard]);
-                planet.radius = Convert.ToInt32(data[(int) Columns.Radius]);
-                planet.tectonics = Convert.ToInt32(data[(int) Columns.Tectonics]);
-                planet.temperature = Convert.ToInt32(data[(int) Columns.Temp]);
-                planet.thermal = Convert.ToInt32(data[(int) Columns.Thermal]);
-                planet.type = data[(int) Columns.Type];
-                planet.weather = Convert.ToInt32(data[(int) Columns.Weather]);
-                planet.axialTilt = Convert.ToInt32(data[(int) Columns.AxialTilt]);
-                planet.bioUnits = Convert.ToInt32(data[(int) Columns.BioUnits]);
-                planet.lifeChance = Convert.ToInt32(data[(int) Columns.LifeChance]);
-                planet.minValue = Convert.ToInt32(data[(int) Columns.MinValue]);
-                planet.minVolume = Convert.ToInt32(data[(int) Columns.MinVolume]);
-                planet.distFromStar = Convert.ToInt32(data[(int) Columns.DistFromStar]);
-
-
-
-                star.planets.Add(planet);
-                
-            }
-
         }
-        
+
         SeparateMoons();
         Debug.Log("Done parsing and sorting");
-        SpawnPlanets();
+        // SpawnPlanets();
         Debug.Log("Done rendering");
         inProgress = false;
 
@@ -238,25 +157,27 @@ public class StarParser : MonoBehaviour
 
     public void SeparateMoons()
     {
-        foreach (StarCluster starCluster in starClusters)
+        foreach (Cluster starCluster in starClusters)
         {
             foreach (Star star in starCluster.stars)
             {
                 List<Planet> parentPlanets = new List<Planet>();
                 foreach (Planet planet in star.planets)
                 {
-                    if (planet.name.Contains("-")) //I am a moon
+                    if (planet.planetName.Contains("-")) //I am a moon
                     {
-                        Planet parent = star.GetPlanetByName(planet.name.Split("-")[0]);
+                        Planet parent = star.GetPlanetByName(planet.planetName.Split("-")[0]);
                         if (parent == null)
                         {
-                            Debug.Log($"Could not find parent for {planet.name}");
+                            Debug.Log($"Could not find parent for {planet.planetName}");
                         }
                         else
                         {
                             if (parent != planet)
                             {
-                                parent.children.Add(planet);
+                                // parent.AddMoon(planet);
+                                planet.gameObject.transform.parent = parent.gameObject.transform;
+                                planet.isMoon = true;
                             }
                         }
                     }
@@ -265,8 +186,6 @@ public class StarParser : MonoBehaviour
                     {
                         parentPlanets.Add(planet);
                     }
-                    
-                    
                 }
 
                 star.planets = parentPlanets;
@@ -274,11 +193,11 @@ public class StarParser : MonoBehaviour
         }
     }
 
-    public StarCluster GetClusterByName(String name)
+    public Cluster GetClusterByName(String name)
     {
-        foreach (StarCluster cluster in starClusters)
+        foreach (Cluster cluster in starClusters)
         {
-            if (cluster.name.Equals(name))
+            if (cluster.clusterName.Equals(name))
             {
                 return cluster;
             }
@@ -289,7 +208,7 @@ public class StarParser : MonoBehaviour
 
     public void SpawnPlanets()
     {
-        foreach (StarCluster cluster in starClusters)
+        foreach (Cluster cluster in starClusters)
         {
             GameObject c = Instantiate(clusterPrefab);
             foreach (Star star in cluster.stars)
