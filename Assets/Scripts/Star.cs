@@ -1,11 +1,15 @@
 
 using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Star : MonoBehaviour
+public class Star : CelestialObject, HasDetails
 {
+    public GameObject clickableStar;
+    public GameObject solarSystemStar; 
+    
     public string starName;
     public float x;
     public float y;
@@ -72,7 +76,7 @@ public class Star : MonoBehaviour
                 break;
             case "super giant": scale = 5.0f;
                 break;
-            default: scale = 10.0f;
+            default: scale = 80.0f; //debug to make it obvious
                 break;
         }
 
@@ -86,6 +90,11 @@ public class Star : MonoBehaviour
             planet.EnableMoons(enabled);
             planet.gameObject.SetActive(enabled);
         }
+    }
+
+    public string GetDetails()
+    {
+        return "";
     }
 }
 

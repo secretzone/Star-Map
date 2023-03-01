@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Cluster : MonoBehaviour
+public class Cluster : CelestialObject
 {
     public string clusterName;
     public List<Star> stars = new List<Star>();

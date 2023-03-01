@@ -1,9 +1,10 @@
 
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Planet : MonoBehaviour
+public class Planet : CelestialObject, HasDetails
 {
     public string planetName; //III, IV, etc
     public string type;
@@ -58,4 +59,8 @@ public class Planet : MonoBehaviour
         //TODO
     }
 
+    public string GetDetails()
+    {
+        return "";
+    }
 }
