@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public void ShowStarMapView()
     {
         solarSystemCamera.gameObject.SetActive(false);
-        solarSystemCamera.gameObject.SetActive(false);
+        solarSystemCanvas.gameObject.SetActive(false);
         
         starMapCamera.gameObject.SetActive(true);
         starMapCanvas.gameObject.SetActive(true);
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         starMapCanvas.gameObject.SetActive(false);
         
         solarSystemCamera.gameObject.SetActive(true);
-        solarSystemCamera.gameObject.SetActive(true);
+        solarSystemCanvas.gameObject.SetActive(true);
     }
     
 
