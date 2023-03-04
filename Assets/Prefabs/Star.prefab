@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   star: {fileID: -7841989381166461399}
+  offset: {x: 230, y: 0, z: 0}
 --- !u!58 &8968204652621970315
 CircleCollider2D:
   m_ObjectHideFlags: 0

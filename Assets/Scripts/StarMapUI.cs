@@ -5,6 +5,9 @@ using UnityEngine;
 public class StarMapUI : MonoBehaviour
 {
     public GameObject starNameText;
+
+    public GameObject starNameAnchor;
+
     // Start is called before the first frame update
     void Start()
     {
