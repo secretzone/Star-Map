@@ -7,48 +7,40 @@ using UnityEngine.Serialization;
 public class CameraBehavior : MonoBehaviour
 {
     private Vector3 _initialPosition;
+
     private Camera _camera;
     private bool _inProgress = false;
     public float zoomedInSize;
     public float zoomedOutSize;
     public float zoomSpeed = 10;
 
-    public Canvas starMapCanvas;
 
-    public Canvas solarSystemCanvas;
     // Start is called before the first frame update
     void Start()
     {
         _camera = GetComponent<Camera>();
         _initialPosition = _camera.WorldToScreenPoint(transform.position);
-        starMapCanvas.gameObject.SetActive(true);
-        solarSystemCanvas.gameObject.SetActive(false);
     }
+    
 
     public void ResetPosition()
     {
         transform.position = _initialPosition;
     }
 
-    public void ZoomInToStar(Star star)
-    {
-        Debug.Log("Zooming in");
-        transform.position = star.transform.position;
-        _camera.orthographicSize = zoomedInSize;
-        starMapCanvas.gameObject.SetActive(false);
-        solarSystemCanvas.gameObject.SetActive(true);
-        // StartCoroutine(ChangeOrtho(zoomedInSize));
-    }
+    // public void ZoomInToStar(Star star)
+    // {
+    //     Debug.Log("Zooming in");
+    //     transform.position = star.transform.position;
+    //     _camera.orthographicSize = zoomedInSize;
+    // }
 
-    public void ZoomOutToMap()
-    {
-        Debug.Log("Zooming out");
-        ResetPosition();
-        _camera.orthographicSize = zoomedOutSize;
-        starMapCanvas.gameObject.SetActive(true);
-        solarSystemCanvas.gameObject.SetActive(false);
-        // StartCoroutine(ChangeOrtho(zoomedOutSize));
-    }
+    // public void ZoomOutToMap()
+    // {
+    //     Debug.Log("Zooming out");
+    //     ResetPosition();
+    //     _camera.orthographicSize = zoomedOutSize;
+    // }
 
     private IEnumerator ChangeOrtho(float targetZoom)
     {

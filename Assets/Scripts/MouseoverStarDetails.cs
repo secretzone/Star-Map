@@ -34,7 +34,7 @@ public class MouseoverStarDetails : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log($"Clicked {star.starName}");
-            GameManager.instance.mainCamera.GetComponent<CameraBehavior>().ZoomInToStar(star);
+            GameManager.instance.ShowSolarSystemView();
         }
     }
 
