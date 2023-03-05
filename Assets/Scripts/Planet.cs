@@ -54,7 +54,7 @@ public class Planet : CelestialObject, HasDetails
 
     public void Initialize(Star star)
     {
-        transform.parent = star.transform;
+        transform.parent = star.innerSystem.transform;
         gameObject.name = planetName;
         //TODO
     }

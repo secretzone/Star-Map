@@ -16,6 +16,7 @@ public class MouseoverStarDetails : MonoBehaviour
     private GameObject starNameText;
     private GameObject starNameAnchor;
     private bool _displaying = false;
+    private bool _inProgress = false;
     void Start()
     {
         starNameText = GameManager.instance.starMapCanvas.GetComponent<StarMapUI>().starNameText;
@@ -42,11 +43,29 @@ public class MouseoverStarDetails : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log($"Clicked {star.starName}");
-                GameManager.instance.ShowSolarSystemView();
+                StartCoroutine(ShowSolarSystem());
             }     
         }
 
     }
+
+
+    IEnumerator ShowSolarSystem()
+    {
+        if (_inProgress)
+        {
+            yield return null;
+        }
+        else
+        {
+            _inProgress = true;
+        }
+        SolarSystem.instance.ClearSystem();
+        SolarSystem.instance.Initialize(star);
+        GameManager.instance.ShowSolarSystemView();
+        _inProgress = false;
+    }
+    
 
     void OnMouseExit()
     {

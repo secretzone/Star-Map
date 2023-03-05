@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         
         solarSystemCamera.gameObject.SetActive(true);
         solarSystemCanvas.gameObject.SetActive(true);
+        
     }
     
 

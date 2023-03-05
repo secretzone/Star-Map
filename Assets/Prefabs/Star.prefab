@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickableStar: {fileID: 8372896800093155669}
-  solarSystemStar: {fileID: 0}
+  solarSystemStar: {fileID: 3765323505812863020}
   starName: 
   x: 0
   y: 0
@@ -120,12 +120,12 @@ GameObject:
   - component: {fileID: 4252763156640953516}
   - component: {fileID: 3305778880296634344}
   m_Layer: 0
-  m_Name: SolarSystemStar
+  m_Name: InnerSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4252763156640953516
 Transform:
   m_ObjectHideFlags: 0

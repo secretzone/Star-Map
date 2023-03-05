@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class Star : CelestialObject, HasDetails
 {
     public GameObject clickableStar;
-    public GameObject solarSystemStar; 
+    [FormerlySerializedAs("solarSystemStar")] public GameObject innerSystem; 
     
     public string starName;
     public float x;
@@ -48,7 +48,8 @@ public class Star : CelestialObject, HasDetails
         transform1.localScale = GetStarSize();
         transform1.parent = cluster.transform;
         gameObject.name = starName;
-        GetComponent<SpriteRenderer>().color = GetStarColor();
+        clickableStar.GetComponent<SpriteRenderer>().color = GetStarColor();
+        innerSystem.GetComponent<SpriteRenderer>().color = GetStarColor();
         
     }
 
