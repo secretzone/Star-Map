@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickableStar: {fileID: 8372896800093155669}
-  solarSystemStar: {fileID: 3765323505812863020}
+  solarSystem: {fileID: 7821119651636396582}
   starName: 
   x: 0
   y: 0
@@ -108,7 +108,6 @@ MonoBehaviour:
   color: 
   distSol: 0
   fleet: 
-  planets: []
 --- !u!1 &3765323505812863020
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,8 +118,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4252763156640953516}
   - component: {fileID: 3305778880296634344}
+  - component: {fileID: 7821119651636396582}
   m_Layer: 0
-  m_Name: InnerSystem
+  m_Name: SolarSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,6 +193,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7821119651636396582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3765323505812863020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2a1efec48954737b53ac5bfa788335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  star: {fileID: -7841989381166461399}
+  planets: []
 --- !u!1 &8372896800093155669
 GameObject:
   m_ObjectHideFlags: 0

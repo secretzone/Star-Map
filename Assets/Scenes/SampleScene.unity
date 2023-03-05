@@ -1835,7 +1835,7 @@ GameObject:
   - component: {fileID: 1355001770}
   - component: {fileID: 1355001771}
   m_Layer: 0
-  m_Name: SolarSystem
+  m_Name: SolarSystemAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1880,6 +1880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planets: []
   sun: {fileID: 0}
+  star: {fileID: 0}
 --- !u!1 &1363900081
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class Star : CelestialObject, HasDetails
 {
     public GameObject clickableStar;
-    [FormerlySerializedAs("solarSystemStar")] public GameObject innerSystem; 
+    public SolarSystem solarSystem; 
     
     public string starName;
     public float x;
@@ -17,8 +17,7 @@ public class Star : CelestialObject, HasDetails
     public string color;
     public float distSol; //what is this?
     public string fleet;
-    public List<Planet> planets = new List<Planet>();
-
+    // public List<Planet> planets = new List<Planet>();
 
     
     
@@ -30,7 +29,7 @@ public class Star : CelestialObject, HasDetails
 
     public Planet GetPlanetByName(string planetName)
     {
-        foreach (Planet planet in planets)
+        foreach (Planet planet in solarSystem.planets)
         {
             if (planet.planetName == planetName)
             {
@@ -49,7 +48,7 @@ public class Star : CelestialObject, HasDetails
         transform1.parent = cluster.transform;
         gameObject.name = starName;
         clickableStar.GetComponent<SpriteRenderer>().color = GetStarColor();
-        innerSystem.GetComponent<SpriteRenderer>().color = GetStarColor();
+        solarSystem.GetComponent<SpriteRenderer>().color = GetStarColor();
         
     }
 
@@ -84,14 +83,7 @@ public class Star : CelestialObject, HasDetails
         return new Vector3(scale, scale, scale);
     }
 
-    public void EnablePlanets(bool enabled)
-    {
-        foreach (Planet planet in planets)
-        {
-            planet.EnableMoons(enabled);
-            planet.gameObject.SetActive(enabled);
-        }
-    }
+
 
     public string GetDetails()
     {

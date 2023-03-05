@@ -60,8 +60,8 @@ public class MouseoverStarDetails : MonoBehaviour
         {
             _inProgress = true;
         }
-        SolarSystem.instance.ClearSystem();
-        SolarSystem.instance.Initialize(star);
+        SolarSystemSpawner.instance.ClearSystem();
+        SolarSystemSpawner.instance.Initialize(star);
         GameManager.instance.ShowSolarSystemView();
         _inProgress = false;
     }

@@ -136,7 +136,8 @@ public class StarParser : MonoBehaviour
                     planet.distFromStar = Convert.ToInt32(data[(int) Columns.DistFromStar]);
                     planet.bioHazard = Convert.ToInt32(data[(int) Columns.BioHazard]);
                     planet.Initialize(star);
-                    star.planets.Add(planet);
+                    // star.planets.Add(planet);
+                    star.solarSystem.planets.Add(planet);
                 }
             }
             catch (Exception e)
@@ -162,7 +163,7 @@ public class StarParser : MonoBehaviour
             foreach (Star star in starCluster.stars)
             {
                 List<Planet> parentPlanets = new List<Planet>();
-                foreach (Planet planet in star.planets)
+                foreach (Planet planet in star.solarSystem.planets)
                 {
                     if (planet.planetName.Contains("-")) //I am a moon
                     {
@@ -188,7 +189,7 @@ public class StarParser : MonoBehaviour
                     }
                 }
 
-                star.planets = parentPlanets;
+                star.solarSystem.planets = parentPlanets;
             }
         }
     }
@@ -212,11 +213,7 @@ public class StarParser : MonoBehaviour
         {
             foreach (Star star in cluster.stars)
             {
-                foreach (Planet planet in star.planets)
-                {
-                    planet.EnableMoons(enabled);
-                    planet.gameObject.SetActive(enabled);
-                }
+                star.solarSystem.EnablePlanets(enabled);
             }
         }
     }
