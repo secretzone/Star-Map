@@ -6,9 +6,10 @@ using UnityEngine.Serialization;
 public class RotateAndOrbit : MonoBehaviour {
 
     public float rotationSpeed = 100f;
-    public float orbitSpeed = 50f;
-    [FormerlySerializedAs("desiredMoonDistance")] public float distance;
+    [FormerlySerializedAs("rotationStep")] public float orbitSpeed = 0.001f;
+    public float distance;
     public Transform target;
+    public Transform rotationReference;
 
     void Start ()
     {
@@ -24,7 +25,8 @@ public class RotateAndOrbit : MonoBehaviour {
 
         float step = (orbitSpeed / distance) * 360;
         
-        transform.Rotate(dir, rotationSpeed * Time.deltaTime);
+        // transform.Rotate(dir, rotationSpeed * Time.deltaTime);
+        rotationReference.LookAt(target.position); 
         transform.RotateAround(target.position, dir, step * Time.deltaTime);
         
         //fix possible changes in distance

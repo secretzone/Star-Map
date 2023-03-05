@@ -35,6 +35,8 @@ public class Planet : CelestialObject
     
     public List<Planet> moons = new List<Planet>();
 
+    public Transform rotationReference;
+
 
     public Planet(string planetName)
     {
