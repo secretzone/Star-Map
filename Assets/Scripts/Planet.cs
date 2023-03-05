@@ -60,8 +60,8 @@ public class Planet : CelestialObject
     {
         transform.parent = star.solarSystem.transform;
         gameObject.name = planetName;
-        float distance = isMoon ? Math.Max(distFromStar / 1000, 1) : 1;
-        GetComponent<RotateAndOrbit>().desiredMoonDistance = distance;
+        float distance = Math.Max(distFromStar / 1000, 1);
+        GetComponent<RotateAndOrbit>().distance = distance;
         //TODO
     }
 
