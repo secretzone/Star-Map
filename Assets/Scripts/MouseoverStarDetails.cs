@@ -34,7 +34,17 @@ public class MouseoverStarDetails : MonoBehaviour
                 _displaying = true;
 
                 starNameAnchor.transform.position = star.transform.position;// + offset;//camera.WorldToScreenPoint(star.transform.position);
-                String text = $"{star.transform.parent.GetComponent<Cluster>().clusterName} {star.starName}";
+                String clusterName = star.transform.parent.GetComponent<Cluster>().clusterName;
+                String starName = star.starName;
+                String text = "";
+                if (starName.ToLower() == "prime")
+                {
+                    text = $"{clusterName}";
+                }
+                else
+                {
+                    text = $"{starName} {clusterName}";
+                }
                 TextMeshPro tmp = starNameText.GetComponent<TextMeshPro>();
                 tmp.text = text;
                 tmp.color = star.GetStarColor();

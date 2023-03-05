@@ -12,11 +12,11 @@ public class SolarSystemSpawner : MonoBehaviour
     public void Initialize(Star _star)
     {
         
-        var transform1 = transform;
-        sun = Instantiate(_star.solarSystem.gameObject, transform1.position, Quaternion.identity, transform1)
-            .GetComponent<SolarSystem>();
-        sun.gameObject.SetActive(true);
-        sun.EnablePlanets(true);
+        //var transform1 = transform;
+        //sun = Instantiate(_star.solarSystem.gameObject, transform1.position, Quaternion.identity, transform1)
+        //    .GetComponent<SolarSystem>();
+        //sun.gameObject.SetActive(true);
+        //sun.EnablePlanets(true);
     }
 
     public void ClearSystem()
