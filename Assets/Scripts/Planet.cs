@@ -30,14 +30,13 @@ public class Planet : CelestialObject
     public int bioHazard;
 
     public bool isMoon = false;
-
     public float orbitSpeed = 1f;
-    
     public List<Planet> moons = new List<Planet>();
-
     public Transform rotationReference;
-
-
+    public Sprite[] rotationSprites;
+    public SpriteRenderer spriteRenderer;
+    public int index;
+    public float angle;
     public Planet(string planetName)
     {
         this.planetName = planetName;
@@ -51,13 +50,6 @@ public class Planet : CelestialObject
         }
     }
 
-    // public void AddMoon(Planet moon)
-    // {
-    //     moon.transform.parent = transform;
-    //     moon.isMoon = true;
-    //     moons.Add(moon);
-    // }
-
     public void Initialize(Star star)
     {
         transform.parent = star.solarSystem.transform;
@@ -67,17 +59,18 @@ public class Planet : CelestialObject
         //TODO
     }
 
-    // public static Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion angle) {
-    //     return angle * ( point - pivot) + pivot;
-    // }
-    //
-    // void Update()
-    // {
-    //     transform.position = 
-    //         RotatePointAroundPivot(transform.position,
-    //             transform.parent.position,
-    //             Quaternion.Euler(0, OrbitDegrees * Time.deltaTime, 0));
-    // }
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-    
+    private void Update()
+    {
+        float offset = 0;
+        int imageCount = rotationSprites.Length;
+        angle = rotationReference.rotation.x + offset;
+        float degreesPerSprite = 360f / imageCount;
+        index = Mathf.RoundToInt(angle / degreesPerSprite);
+        spriteRenderer.sprite = rotationSprites[index];
+    }
 }

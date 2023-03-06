@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class RotateAndOrbit : MonoBehaviour {
-
-    public float rotationSpeed = 100f;
-    [FormerlySerializedAs("rotationStep")] public float orbitSpeed = 0.001f;
+    
+    [Tooltip("Degrees per frame to rotate")]
+    public float orbitSpeed = 0.001f;
+    
+    [Tooltip("Distance from target transform")]
     public float distance;
+    
+    [Tooltip("The transform to rotate around")]
     public Transform target;
+    
+    [Tooltip("This transform will always 'look at' the target")]
     public Transform rotationReference;
 
     void Start ()
