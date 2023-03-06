@@ -7,6 +7,7 @@ public class LookAtCamera : MonoBehaviour
     public Camera targetCamera;
     void Update()
     {
-        if (targetCamera != null) transform.forward = -targetCamera.transform.forward;
+        Vector3 faceDir = new Vector3(targetCamera.transform.forward.x, targetCamera.transform.forward.y, 0);
+        if (targetCamera != null) transform.forward = -faceDir;
     }
 }

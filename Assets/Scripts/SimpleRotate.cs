@@ -15,7 +15,6 @@ public class SimpleRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         transform.Rotate( 0.0f, 0.0f,speed * Time.deltaTime, Space.Self);
     }
 }
