@@ -26,26 +26,26 @@ public class MouseoverStarDetails : MonoBehaviour
 
     void OnMouseOver()
     {
-        Camera camera = GameManager.instance.starMapCamera;
-        if (camera.isActiveAndEnabled)
-        {
-            if (!_displaying) //just need to run this once
-            {
-                _displaying = true;
-
-                starNameAnchor.transform.position = star.transform.position;// + offset;//camera.WorldToScreenPoint(star.transform.position);
-                String text = $"{star.transform.parent.GetComponent<Cluster>().clusterName} {star.starName}";
-                TextMeshPro tmp = starNameText.GetComponent<TextMeshPro>();
-                tmp.text = text;
-                tmp.color = star.GetStarColor();
-                starNameText.SetActive(true);
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log($"Clicked {star.starName}");
-                StartCoroutine(ShowSolarSystem());
-            }     
-        }
+        // Camera camera = GameManager.instance.starMapCamera;
+        // if (camera.isActiveAndEnabled)
+        // {
+        //     if (!_displaying) //just need to run this once
+        //     {
+        //         _displaying = true;
+        //
+        //         starNameAnchor.transform.position = star.transform.position;// + offset;//camera.WorldToScreenPoint(star.transform.position);
+        //         String text = $"{star.transform.parent.GetComponent<Cluster>().clusterName} {star.starName}";
+        //         TextMeshPro tmp = starNameText.GetComponent<TextMeshPro>();
+        //         tmp.text = text;
+        //         tmp.color = star.GetStarColor();
+        //         starNameText.SetActive(true);
+        //     }
+        //     if (Input.GetMouseButtonDown(0))
+        //     {
+        //         Debug.Log($"Clicked {star.starName}");
+        //         StartCoroutine(ShowSolarSystem());
+        //     }     
+        // }
 
     }
 

@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class StarParser : MonoBehaviour
 {
+    public static StarParser instance;
+    public TextAsset systemsCsv;
+    
+    public List<Cluster> starClusters;
     private bool inProgress = false;
-
-    public GameObject clusterPrefab;
-    public GameObject starPrefab;
-    public GameObject planetPrefab;
-
+    
     /**
      * These should match the order of the columns in the csv
      */
@@ -47,20 +48,25 @@ public class StarParser : MonoBehaviour
         DistFromStar
     }
 
-    public List<Cluster> starClusters;
 
-    public TextAsset systemsCsv;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         ParseSystemData();
     }
 
     public void ParseSystemData()
     {
         StartCoroutine(ReadStarDataCsv());
-        // StartCoroutine(SpawnPlanets());
     }
 
     public IEnumerator ReadStarDataCsv()
@@ -86,9 +92,7 @@ public class StarParser : MonoBehaviour
                 Cluster cluster = GetClusterByName(clusterName);
                 if (cluster == null)
                 {
-                    cluster = Instantiate(clusterPrefab).GetComponent<Cluster>();
-                    cluster.clusterName = clusterName;
-                    cluster.Initialize(gameObject);
+                    cluster = new Cluster(clusterName);
                     starClusters.Add(cluster);
                 }
 
@@ -97,15 +101,13 @@ public class StarParser : MonoBehaviour
                 Star star = cluster.GetStarByName(starName);
                 if (star == null)
                 {
-                    star = Instantiate(starPrefab).GetComponent<Star>();
-                    star.starName = starName;
+                    star = new Star(starName);
                     star.x = float.Parse(data[(int) Columns.X]);
                     star.y = float.Parse(data[(int) Columns.Y]);
                     star.color = data[(int) Columns.StarColor];
                     star.size = data[(int) Columns.StarSize];
                     star.distSol = float.Parse(data[(int) Columns.DistSol]);
                     star.fleet = data[(int) Columns.Fleet];
-                    star.Initialize(cluster);
                     cluster.stars.Add(star);
                 }
 
@@ -114,8 +116,7 @@ public class StarParser : MonoBehaviour
                 Planet planet = star.GetPlanetByName(planetName);
                 if (planet == null)
                 {
-                    planet = Instantiate(planetPrefab).GetComponent<Planet>();
-                    planet.planetName = planetName;
+                    planet = new Planet(planetName);
                     planet.atmosphere = Convert.ToInt32(data[(int) Columns.Atmosphere]);
                     planet.day = Convert.ToInt32(data[(int) Columns.Day]);
                     planet.density = Convert.ToInt32(data[(int) Columns.Density]);
@@ -135,9 +136,7 @@ public class StarParser : MonoBehaviour
                     planet.minVolume = Convert.ToInt32(data[(int) Columns.MinVolume]);
                     planet.distFromStar = Convert.ToInt32(data[(int) Columns.DistFromStar]);
                     planet.bioHazard = Convert.ToInt32(data[(int) Columns.BioHazard]);
-                    planet.Initialize(star);
-                    // star.planets.Add(planet);
-                    star.solarSystem.planets.Add(planet);
+                    star.planets.Add(planet);
                 }
             }
             catch (Exception e)
@@ -148,8 +147,6 @@ public class StarParser : MonoBehaviour
 
         SeparateMoons();
         Debug.Log("Done parsing and sorting");
-        EnablePlanets(false);
-        Debug.Log("Done rendering");
         inProgress = false;
 
         yield return null;
@@ -163,7 +160,7 @@ public class StarParser : MonoBehaviour
             foreach (Star star in starCluster.stars)
             {
                 List<Planet> parentPlanets = new List<Planet>();
-                foreach (Planet planet in star.solarSystem.planets)
+                foreach (Planet planet in star.planets)
                 {
                     if (planet.planetName.Contains("-")) //I am a moon
                     {
@@ -176,9 +173,7 @@ public class StarParser : MonoBehaviour
                         {
                             if (parent != planet)
                             {
-                                // parent.AddMoon(planet);
-                                planet.gameObject.transform.parent = parent.gameObject.transform;
-                                planet.isMoon = true;
+                                parent.moons.Add(planet);
                             }
                         }
                     }
@@ -189,7 +184,7 @@ public class StarParser : MonoBehaviour
                     }
                 }
 
-                star.solarSystem.planets = parentPlanets;
+                star.planets = parentPlanets;
             }
         }
     }
@@ -206,15 +201,5 @@ public class StarParser : MonoBehaviour
 
         return null;
     }
-
-    public void EnablePlanets(bool enabled)
-    {
-        foreach (Cluster cluster in starClusters)
-        {
-            foreach (Star star in cluster.stars)
-            {
-                star.solarSystem.EnablePlanets(enabled);
-            }
-        }
-    }
+    
 }

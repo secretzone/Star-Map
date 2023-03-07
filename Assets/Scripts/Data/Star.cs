@@ -5,11 +5,10 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Star : CelestialObject, HasDetails
+public class Star
 {
     public GameObject clickableStar;
-    public SolarSystem solarSystem; 
-    
+    // public SolarSystem solarSystem; 
     public string starName;
     public float x;
     public float y;
@@ -17,10 +16,7 @@ public class Star : CelestialObject, HasDetails
     public string color;
     public float distSol; //what is this?
     public string fleet;
-    // public List<Planet> planets = new List<Planet>();
-
-    
-    
+    public List<Planet> planets = new List<Planet>();
 
     public Star(string starName)
     {
@@ -29,7 +25,7 @@ public class Star : CelestialObject, HasDetails
 
     public Planet GetPlanetByName(string planetName)
     {
-        foreach (Planet planet in solarSystem.planets)
+        foreach (Planet planet in planets)
         {
             if (planet.planetName == planetName)
             {
@@ -40,17 +36,17 @@ public class Star : CelestialObject, HasDetails
         return null;
     }
 
-    public void Initialize(Cluster cluster)
-    {
-        var transform1 = transform;
-        transform1.position = new Vector3(x, y, 0);
-        transform1.localScale = GetStarSize();
-        transform1.parent = cluster.transform;
-        gameObject.name = starName;
-        clickableStar.GetComponent<SpriteRenderer>().color = GetStarColor();
-        solarSystem.GetComponent<SpriteRenderer>().color = GetStarColor();
-        
-    }
+    // public void Initialize(Cluster cluster)
+    // {
+    //     var transform1 = transform;
+    //     transform1.position = new Vector3(x, y, 0);
+    //     transform1.localScale = GetStarSize();
+    //     transform1.parent = cluster.transform;
+    //     gameObject.name = starName;
+    //     clickableStar.GetComponent<SpriteRenderer>().color = GetStarColor();
+    //     solarSystem.GetComponent<SpriteRenderer>().color = GetStarColor();
+    //     
+    // }
 
     public Color GetStarColor()
     {
@@ -81,13 +77,6 @@ public class Star : CelestialObject, HasDetails
         }
 
         return new Vector3(scale, scale, scale);
-    }
-
-
-
-    public string GetDetails()
-    {
-        return "";
     }
 }
 

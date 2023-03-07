@@ -43,21 +43,4 @@ public class RotateAndOrbit : MonoBehaviour {
         // transform.LookAt(target.transform);
     }
 
-    // void Rotate()
-    // {
-    //     float horizontal = Input.GetAxisRaw("Horizontal");
-    //     float deltaTime = Time.deltaTime;
-    //     Vector3 O = target.position;
-    //     Vector3 P = transform.position;
-    //     Vector3 R = P - O;
-    //     float r = Mathf.Clamp(
-    //         Vector3.Magnitude(R) - ( horizontal*orbitSpeed*deltaTime ) ,
-    //         _rMin , _rMax
-    //     );
-    //     float c = 2f*Mathf.PI * r;
-    //     float angle = ( _tangentialSpeed*deltaTime / c ) * 360f;
-    //     Quaternion rot = Quaternion.AngleAxis( angle , Vector3.up );
-    //
-    //     transform.position = O + ( rot * Vector3.Normalize(R) * r );
-    // }
 }
