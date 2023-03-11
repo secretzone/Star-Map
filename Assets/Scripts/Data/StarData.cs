@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using DefaultNamespace;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+// [Serializable]
 public class StarData
 {
     // public SolarSystem solarSystem; 
@@ -15,9 +16,10 @@ public class StarData
     public string color;
     public float distSol; //what is this?
     public string fleet;
+    [NonSerialized]
     public List<PlanetData> planets = new List<PlanetData>();
-
-    public ClusterData ClusterData;
+    [NonSerialized]
+    public ClusterData parentCluster;
 
     public Vector3 GetPosition()
     {
@@ -75,7 +77,7 @@ public class StarData
 
     public String GetFullName()
     {
-        return $"{name} {ClusterData.name}";
+        return $"{name} {parentCluster.name}";
     }
 }
 

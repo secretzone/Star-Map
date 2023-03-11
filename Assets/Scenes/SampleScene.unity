@@ -351,6 +351,18 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1709674471756273782, guid: 04062bf5e56284f2b81a5ba66274cdd6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709674471756273782, guid: 04062bf5e56284f2b81a5ba66274cdd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709674471756273782, guid: 04062bf5e56284f2b81a5ba66274cdd6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709674471756273782, guid: 04062bf5e56284f2b81a5ba66274cdd6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2225
       objectReference: {fileID: 0}
@@ -565,7 +577,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.29
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -2043,6 +2055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   systemsCsv: {fileID: 4900000, guid: 5944a17c22d714d2fb14a2ac827a24fc, type: 3}
+  starClusters: []
 --- !u!114 &1820738999
 MonoBehaviour:
   m_ObjectHideFlags: 0

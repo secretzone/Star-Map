@@ -83,7 +83,7 @@ public class StarParser : MonoBehaviour
                     starData.size = data[(int) Columns.StarSize];
                     starData.distSol = float.Parse(data[(int) Columns.DistSol]);
                     starData.fleet = data[(int) Columns.Fleet];
-                    starData.ClusterData = clusterData;
+                    starData.parentCluster = clusterData;
                     clusterData.stars.Add(starData);
                     
                 }
@@ -113,7 +113,7 @@ public class StarParser : MonoBehaviour
                     planetData.minVolume = Convert.ToInt32(data[(int) Columns.MinVolume]);
                     planetData.distFromStar = Convert.ToInt32(data[(int) Columns.DistFromStar]);
                     planetData.bioHazard = Convert.ToInt32(data[(int) Columns.BioHazard]);
-                    planetData.StarData = starData;
+                    planetData.parentStar = starData;
                     starData.planets.Add(planetData);
                 }
             }
@@ -149,6 +149,9 @@ public class StarParser : MonoBehaviour
                             if (parent != planet)
                             {
                                 parent.moons.Add(planet);
+                                
+                                planet.isMoon = true;
+                                planet.parent = parent;
                             }
                         }
                     }

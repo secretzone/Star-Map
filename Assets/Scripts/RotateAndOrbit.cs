@@ -29,7 +29,7 @@ public class RotateAndOrbit : MonoBehaviour {
 
     void Update () {
         Vector3 dir = Vector3.forward;
-
+        
         float step = (orbitSpeed / distance) * 360;
         
         // transform.Rotate(dir, rotationSpeed * Time.deltaTime);

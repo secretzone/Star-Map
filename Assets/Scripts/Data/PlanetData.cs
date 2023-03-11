@@ -5,9 +5,10 @@ using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+// [Serializable]
 public class PlanetData
 {
+    [Header("Parsed data")]
     public string name; //III, IV, etc
     public string type;
     public int hazard;
@@ -29,17 +30,20 @@ public class PlanetData
     public int distFromStar;
     public int bioHazard;
     
-    
+    [Header("Config")]
     public bool isMoon = false;
-    public float orbitSpeed = 1f;
-    public Transform rotationReference;
-    public Sprite[] rotationSprites;
-    public SpriteRenderer spriteRenderer;
-    public int index;
-    public float angle;
+
+    public float planetScale = 0.01f;
+    public float distanceScale = 0.001f;
     
+    [NonSerialized]
+    public PlanetData parent;
+    [NonSerialized]
+    public StarData parentStar;
+    [NonSerialized]
     public List<PlanetData> moons = new List<PlanetData>();
-    public StarData StarData;
+    
+    
     
     
     public PlanetData(string name)
@@ -47,35 +51,14 @@ public class PlanetData
         this.name = name;
     }
 
-    // public void EnableMoons(bool enabled)
-    // {
-    //     foreach (Planet moon in moons)
-    //     {
-    //         moon.gameObject.SetActive(enabled);
-    //     }
-    // }
+    public Vector3 GetPlanetSize()
+    {
+        float scale = radius * planetScale;
+        return new Vector3(scale, scale, scale);
+    }
 
-    // public void Initialize(Star star)
-    // {
-    //     transform.parent = star.solarSystem.transform;
-    //     gameObject.name = planetName;
-    //     float distance = Math.Max(distFromStar / 1000, 1);
-    //     GetComponent<RotateAndOrbit>().distance = distance;
-    //     //TODO
-    // }
-
-    // private void Start()
-    // {
-    //     spriteRenderer = GetComponent<SpriteRenderer>();
-    // }
-
-    // private void Update()
-    // {
-    //     float offset = 0;
-    //     int imageCount = rotationSprites.Length;
-    //     angle = rotationReference.rotation.x + offset;
-    //     float degreesPerSprite = 360f / imageCount;
-    //     index = Mathf.RoundToInt(angle / degreesPerSprite);
-    //     spriteRenderer.sprite = rotationSprites[index];
-    // }
+    public float GetPlanetDistance()
+    {
+        return distFromStar * distanceScale;
+    }
 }

@@ -29,6 +29,7 @@ public class SolarSystem : MonoBehaviour
         _starData = starData;
         ClearBodies();
         _sun = Instantiate(sunPrefab, transform.position, Quaternion.identity, transform);
+        _sun.Initialize(_starData);
         foreach (PlanetData planet in _starData.planets)
         {
             OuterPlanet p = Instantiate(outerPlanetPrefab, _sun.transform.position, Quaternion.identity,

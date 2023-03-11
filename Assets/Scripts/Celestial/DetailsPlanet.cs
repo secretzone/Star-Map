@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DetailsPlanet : MonoBehaviour
 {
-    private PlanetData _planetData;
+    public PlanetData planetData;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,8 @@ public class DetailsPlanet : MonoBehaviour
         
     }
 
-    public void Initialize(PlanetData planetData)
+    public void Initialize(PlanetData data)
     {
-        _planetData = planetData;
+        this.planetData = data;
     }
 }

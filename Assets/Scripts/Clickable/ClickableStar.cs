@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ClickableStar : MonoBehaviour
 {
-
+    [NonSerialized]
     public StarData starData;
     private SpriteRenderer _spriteRenderer;
     private bool _displaying;
