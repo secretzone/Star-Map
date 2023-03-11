@@ -28,12 +28,12 @@ public class SpriteIndexFromRotation : MonoBehaviour
         angle = Constrain(angle, 360f, 0f);
         float degreesPerSprite = 360f / imageCount;
         index = Mathf.RoundToInt(angle / degreesPerSprite);
-        index = Constrain(index, imageCount, 1) - 1;
-        _spriteRenderer.sprite = sprites[index];
+        index = Constrain(index, imageCount, 1);
+        _spriteRenderer.sprite = sprites[index - 1];
     }
 
     /**
-     * Goal here is to loop around so we aren't doing match against huge numbers.
+     * Goal here is to loop around so we aren't doing math against huge numbers.
      */
     private static float Constrain(float input, float max, float min)
     {
