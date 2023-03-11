@@ -37,7 +37,7 @@ public class ClickableStar : MonoBehaviour
             if (!_displaying) //just need to run this once
             {
                 _displaying = true;
-        
+                _starMapUI.starNameText.gameObject.SetActive(true);
                 _starMapUI.SetStarNameTextPosition(starData.GetPosition());
                 String text = $"{starData.GetFullName()}";
                 _starMapUI.starNameText.text = text;
@@ -51,6 +51,10 @@ public class ClickableStar : MonoBehaviour
             }     
         }
     }
-    
 
+    private void OnMouseExit()
+    {
+        _displaying = false;
+        _starMapUI.starNameText.gameObject.SetActive(false);
+    }
 }

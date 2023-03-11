@@ -27,7 +27,7 @@ public class StarMapUI : MonoBehaviour
 
     public void SetStarNameTextPosition(Vector3 pos)
     {
-        starNameAnchor.position = starMapCamera.WorldToScreenPoint(pos);
+        starNameAnchor.position = pos; //starMapCamera.WorldToScreenPoint(pos);
     }
 
     // Update is called once per frame
