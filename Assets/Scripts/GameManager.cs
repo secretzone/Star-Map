@@ -51,24 +51,20 @@ public class GameManager : MonoBehaviour
     {
         //Coroutine to load star map here
         solarSystem.ClearBodies();
-        // solarSystemCamera.gameObject.SetActive(false);
         solarSystemUI.Enabled(false);
-        // solarSystemAnchor.GetComponent<SolarSystemSpawner>().ClearSystem();
         
-        // starMapCamera.gameObject.SetActive(true);
         starMapUI.Enabled(true);
         starMap.gameObject.SetActive(true);
     }
 
     public void ShowSolarSystemView(StarData starData)
     {
-        solarSystem.SpawnBodies(starData);
-        // starMapCamera.gameObject.SetActive(false);
+        
         starMapUI.Enabled(false);
         starMap.gameObject.SetActive(false);
         
-        // solarSystemCamera.gameObject.SetActive(true);
-        starMapUI.Enabled(true);
+        solarSystem.SpawnBodies(starData);
+        solarSystemUI.Enabled(true);
     }
     
 

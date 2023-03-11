@@ -8,15 +8,19 @@ public class StarMapUI : MonoBehaviour
     public TextMeshPro starNameText;
     public Transform starNameAnchor;
 
+    public GameObject canvas;
+    
     public Camera starMapCamera;
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     public void Enabled(bool enabled)
     {
         starMapCamera.gameObject.SetActive(enabled);
+        canvas.SetActive(enabled);
         // starNameText.gameObject.SetActive(enabled);
         // starNameAnchor.gameObject.SetActive(enabled);
     }

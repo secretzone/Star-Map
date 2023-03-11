@@ -268,6 +268,8 @@ GameObject:
   m_Component:
   - component: {fileID: 163354545}
   - component: {fileID: 163354544}
+  - component: {fileID: 163354547}
+  - component: {fileID: 163354546}
   m_Layer: 0
   m_Name: -GameManager-
   m_TagString: Untagged
@@ -287,8 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb11b7be4afb46ccb55f5e23221b572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starMapUI: {fileID: 1363900086}
-  solarSystemUI: {fileID: 854067584}
+  starMapUI: {fileID: 163354547}
+  solarSystemUI: {fileID: 163354546}
   starMap: {fileID: 1820738999}
   solarSystem: {fileID: 1126564054}
   starParser: {fileID: 1820738998}
@@ -307,6 +309,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &163354546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163354543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02e5e28fa67146919e20e93a51eb714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solarSystemCamera: {fileID: 528705604}
+  canvas: {fileID: 854067579}
+--- !u!114 &163354547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163354543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bb523f11a3748f0bc766502df0721f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starNameText: {fileID: 1271378664}
+  starNameAnchor: {fileID: 1455547002}
+  canvas: {fileID: 1363900081}
+  starMapCamera: {fileID: 519420031}
 --- !u!1001 &326162295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -516,7 +548,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.6886792, g: 0.6724368, b: 0.6724368, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -708,12 +740,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 854067583}
-  - component: {fileID: 854067584}
   - component: {fileID: 854067582}
   - component: {fileID: 854067581}
   - component: {fileID: 854067580}
   m_Layer: 5
-  m_Name: SolarSystemUI
+  m_Name: SolarSystemCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -803,19 +834,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &854067584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854067579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a02e5e28fa67146919e20e93a51eb714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  solarSystemCamera: {fileID: 528705604}
 --- !u!1 &882843802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,12 +1430,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363900085}
-  - component: {fileID: 1363900086}
   - component: {fileID: 1363900084}
   - component: {fileID: 1363900083}
   - component: {fileID: 1363900082}
   m_Layer: 5
-  m_Name: StarMapUI
+  m_Name: StarMapCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1506,21 +1523,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1363900086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363900081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39bb523f11a3748f0bc766502df0721f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  starNameText: {fileID: 1271378664}
-  starNameAnchor: {fileID: 1455547002}
-  starMapCamera: {fileID: 519420031}
 --- !u!1 &1379661965
 GameObject:
   m_ObjectHideFlags: 0

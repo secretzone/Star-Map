@@ -6,6 +6,7 @@ public class SolarSystemUI : MonoBehaviour
 {
 
     public Camera solarSystemCamera;
+    public GameObject canvas;
     void Start()
     {
 
@@ -20,5 +21,6 @@ public class SolarSystemUI : MonoBehaviour
     public void Enabled(bool enabled)
     {
         solarSystemCamera.gameObject.SetActive(enabled);
+        canvas.SetActive(enabled);
     }
 }
