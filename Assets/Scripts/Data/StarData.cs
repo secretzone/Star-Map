@@ -5,29 +5,35 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Star
+public class StarData
 {
-    public GameObject clickableStar;
     // public SolarSystem solarSystem; 
-    public string starName;
+    public string name;
     public float x;
     public float y;
     public string size;
     public string color;
     public float distSol; //what is this?
     public string fleet;
-    public List<Planet> planets = new List<Planet>();
+    public List<PlanetData> planets = new List<PlanetData>();
 
-    public Star(string starName)
+    public ClusterData ClusterData;
+
+    public Vector3 GetPosition()
     {
-        this.starName = starName;
+        return new Vector3(x, y, 0f);
     }
 
-    public Planet GetPlanetByName(string planetName)
+    public StarData(string name)
     {
-        foreach (Planet planet in planets)
+        this.name = name;
+    }
+
+    public PlanetData GetPlanetByName(string planetName)
+    {
+        foreach (PlanetData planet in planets)
         {
-            if (planet.planetName == planetName)
+            if (planet.name == planetName)
             {
                 return planet;
             }
@@ -35,19 +41,7 @@ public class Star
 
         return null;
     }
-
-    // public void Initialize(Cluster cluster)
-    // {
-    //     var transform1 = transform;
-    //     transform1.position = new Vector3(x, y, 0);
-    //     transform1.localScale = GetStarSize();
-    //     transform1.parent = cluster.transform;
-    //     gameObject.name = starName;
-    //     clickableStar.GetComponent<SpriteRenderer>().color = GetStarColor();
-    //     solarSystem.GetComponent<SpriteRenderer>().color = GetStarColor();
-    //     
-    // }
-
+    
     public Color GetStarColor()
     {
         switch (color.ToLower())
@@ -77,6 +71,11 @@ public class Star
         }
 
         return new Vector3(scale, scale, scale);
+    }
+
+    public String GetFullName()
+    {
+        return $"{name} {ClusterData.name}";
     }
 }
 

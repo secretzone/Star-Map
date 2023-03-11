@@ -6,9 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Planet
+public class PlanetData
 {
-    public string planetName; //III, IV, etc
+    public string name; //III, IV, etc
     public string type;
     public int hazard;
     public int tectonics;
@@ -38,12 +38,13 @@ public class Planet
     public int index;
     public float angle;
     
-    public List<Planet> moons = new List<Planet>();
+    public List<PlanetData> moons = new List<PlanetData>();
+    public StarData StarData;
     
     
-    public Planet(string planetName)
+    public PlanetData(string name)
     {
-        this.planetName = planetName;
+        this.name = name;
     }
 
     // public void EnableMoons(bool enabled)

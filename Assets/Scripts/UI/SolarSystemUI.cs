@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarMapUI : MonoBehaviour
+public class SolarSystemUI : MonoBehaviour
 {
-    public GameObject starNameText;
 
-    public GameObject starNameAnchor;
-
-    // Start is called before the first frame update
+    public Camera solarSystemCamera;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Enabled(bool enabled)
+    {
+        solarSystemCamera.gameObject.SetActive(enabled);
     }
 }
