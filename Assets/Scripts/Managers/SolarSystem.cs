@@ -17,6 +17,7 @@ public class SolarSystem : MonoBehaviour
     void Start()
     {
         _planets = new List<OuterPlanet>();
+        SpawnBodies(GameManager.instance.activeSystem);
     }
 
     // Update is called once per frame

@@ -42,7 +42,7 @@ public class ClickableStar : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log($"Clicked {starData.name}");
-            // init solar system scene
+            GameManager.instance.ShowSolarSystemView(starData);
         }     
         
     }

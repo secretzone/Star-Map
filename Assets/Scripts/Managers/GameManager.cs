@@ -23,19 +23,18 @@ public class GameManager : MonoBehaviour
     
     private bool _inProgress; //If a coroutine is busy
 
+    public StarData activeSystem = null;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null)
+        if (instance != null)
         {
-            instance = this;
+            Destroy(this.gameObject); //There can be only one
         }
-        else
-        {
-            Destroy(this); //There can be only one
-        }
+
+        instance = this;
         DontDestroyOnLoad(this);
         Initialize();
         if (SceneManager.GetActiveScene().name == "LoadingScene")
@@ -64,15 +63,12 @@ public class GameManager : MonoBehaviour
     //     starMap.gameObject.SetActive(true);
     // }
     //
-    // public void ShowSolarSystemView(StarData starData)
-    // {
-    //     
-    //     starMapUI.Enabled(false);
-    //     starMap.gameObject.SetActive(false);
-    //     
-    //     solarSystem.SpawnBodies(starData);
-    //     solarSystemUI.Enabled(true);
-    // }
+    public void ShowSolarSystemView(StarData starData)
+    {
+
+        activeSystem = starData;
+        SceneManager.LoadScene("SolarSystem");
+    }
     
 
     // Update is called once per frame
