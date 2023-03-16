@@ -21,7 +21,7 @@ public class OuterPlanet : MonoBehaviour
     public void Initialize(PlanetData planetData)
     {
         this.planetData = planetData;
-        clickablePlanet.transform.localScale = this.planetData.GetPlanetSize();
+        // clickablePlanet.transform.localScale = this.planetData.GetPlanetSize();
         rotationScript.distance = this.planetData.GetPlanetDistance();
         // rotateScript.distance = _planet.
     }

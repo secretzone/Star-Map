@@ -21,9 +21,9 @@ public class ClickableStar : MonoBehaviour
     }
     
     
-    public void Initialize(StarData starData)
+    public void Initialize(StarData star)
     {
-        this.starData = starData;
+        this.starData = star;
         GetComponent<SpriteRenderer>().color = this.starData.GetStarColor();
         transform.localScale = this.starData.GetStarSize();
         gameObject.name = this.starData.GetFullName();

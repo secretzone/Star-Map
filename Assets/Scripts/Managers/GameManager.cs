@@ -17,30 +17,35 @@ public class GameManager : MonoBehaviour
     // public StarMap starMap;
     // public SolarSystem solarSystem;
 
-    [FormerlySerializedAs("starData")] [Header("Data")]
+
+    [Header("Data")]
     public StarParser starParser;
     public static GameManager instance;
     
     private bool _inProgress; //If a coroutine is busy
 
-    public StarData activeSystem = null;
+    public StarData activeSystem;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        if (instance != null)
+        if (instance == null)
         {
-            Destroy(this.gameObject); //There can be only one
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            Initialize();
+            if (SceneManager.GetActiveScene().name == "LoadingScene")
+            {
+                SceneManager.LoadScene("StarMap");
+            }
+        }
+        else
+        {
+            Destroy(gameObject); //There can be only one. This also lets us put this in any scene.
         }
 
-        instance = this;
-        DontDestroyOnLoad(this);
-        Initialize();
-        if (SceneManager.GetActiveScene().name == "LoadingScene")
-        {
-            SceneManager.LoadScene("StarMap");
-        }
+
         
     }
     
@@ -49,20 +54,14 @@ public class GameManager : MonoBehaviour
     private void Initialize()
     {
         starParser.ParseSystemData();
-        // starMap.Initialize(starParser.starClusters);
-        // ShowStarMapView();
+        // activeSystem = starParser.starClusters[0].stars[0];
     }
-    //
-    // public void ShowStarMapView()
-    // {
-    //     //Coroutine to load star map here
-    //     solarSystem.ClearBodies();
-    //     solarSystemUI.Enabled(false);
-    //     
-    //     starMapUI.Enabled(true);
-    //     starMap.gameObject.SetActive(true);
-    // }
-    //
+    
+    public void ShowStarMapView()
+    {
+        SceneManager.LoadScene("StarMap");
+    }
+    
     public void ShowSolarSystemView(StarData starData)
     {
 
