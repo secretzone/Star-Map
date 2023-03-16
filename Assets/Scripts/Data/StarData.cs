@@ -5,7 +5,7 @@ using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-// [Serializable]
+[Serializable]
 public class StarData
 {
     // public SolarSystem solarSystem; 
@@ -24,6 +24,11 @@ public class StarData
     public Vector3 GetPosition()
     {
         return new Vector3(x, y, 0f);
+    }
+
+    public Vector2 GetPosition2D()
+    {
+        return new Vector2(x, y);
     }
 
     public StarData(string name)
@@ -75,7 +80,7 @@ public class StarData
         return new Vector3(scale, scale, scale);
     }
 
-    public String GetFullName()
+    public string GetFullName()
     {
         return $"{name} {parentCluster.name}";
     }
