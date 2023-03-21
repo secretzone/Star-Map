@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using UnityEngine;
 
 public class SolarSystem : MonoBehaviour
 {
+    public static SolarSystem instance;
     private StarData _starData;
     private Sun _sun;
     private List<OuterPlanet> _planets;
@@ -18,10 +20,25 @@ public class SolarSystem : MonoBehaviour
     public GameObject ui;
     public TextMeshProUGUI solarSystemName;
     public TextMeshProUGUI solarSystemCoords;
+
+    [Header("Scale")]
+    public float rotationSpeed = 0.001f;
+    public float distanceScale = 0.001f;
     
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        
+        
         _starData = GameManager.instance.activeSystem;
         _planets = new List<OuterPlanet>();
         solarSystemName.text = _starData.GetFullName();
@@ -48,6 +65,7 @@ public class SolarSystem : MonoBehaviour
         }
     }
 
+    //Needed? We reset when the scene loads
     private void ClearBodies()
     {
         if (_sun != null) Destroy(_sun.gameObject);

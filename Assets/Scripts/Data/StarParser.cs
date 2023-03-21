@@ -45,7 +45,11 @@ public class StarParser : MonoBehaviour
         Day,
         Atmosphere,
         LifeChance,
-        DistFromStar
+        DistFromStar,
+        SystemSize,
+        SurfaceType,
+        SystemColor,
+        ColorHexCode
     }
 
     public void ParseSystemData()
@@ -107,12 +111,17 @@ public class StarParser : MonoBehaviour
                     planetData.type = data[(int) Columns.Type];
                     planetData.weather = Convert.ToInt32(data[(int) Columns.Weather]);
                     planetData.axialTilt = Convert.ToInt32(data[(int) Columns.AxialTilt]);
+                    planetData.bioHazard = Convert.ToInt32(data[(int) Columns.BioHazard]);
                     planetData.bioUnits = Convert.ToInt32(data[(int) Columns.BioUnits]);
                     planetData.lifeChance = Convert.ToInt32(data[(int) Columns.LifeChance]);
                     planetData.minValue = Convert.ToInt32(data[(int) Columns.MinValue]);
                     planetData.minVolume = Convert.ToInt32(data[(int) Columns.MinVolume]);
                     planetData.distFromStar = Convert.ToInt32(data[(int) Columns.DistFromStar]);
-                    planetData.bioHazard = Convert.ToInt32(data[(int) Columns.BioHazard]);
+                    planetData.systemSize = data[(int) Columns.SystemSize];
+                    planetData.surfaceType = data[(int) Columns.SurfaceType];
+                    planetData.systemColor = data[(int) Columns.SystemColor];
+                    planetData.colorHexCode = data[(int) Columns.ColorHexCode];
+                    
                     planetData.parentStar = starData;
                     starData.planets.Add(planetData);
                 }

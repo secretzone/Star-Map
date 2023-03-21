@@ -6,9 +6,9 @@ using UnityEngine.Serialization;
 public class OuterPlanet : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
-    [FormerlySerializedAs("_planetData")] public PlanetData planetData;
+    public PlanetData planetData;
     public ClickableOuterPlanet clickablePlanet;
-    public RotateAndOrbit rotationScript;
+    // public RotateAndOrbit rotationScript;
 
     // Start is called before the first frame update
     private void Start()
@@ -21,8 +21,14 @@ public class OuterPlanet : MonoBehaviour
     public void Initialize(PlanetData planetData)
     {
         this.planetData = planetData;
-        // clickablePlanet.transform.localScale = this.planetData.GetPlanetSize();
-        rotationScript.distance = this.planetData.GetPlanetDistance();
-        // rotateScript.distance = _planet.
+        //set initial rotation
+        clickablePlanet.Initialize(planetData, GetPlanetDistance());
+        
+        // rotationScript.distance = this.planetData.GetPlanetDistance();
+    }
+    
+    public float GetPlanetDistance()
+    {
+        return planetData.distFromStar * SolarSystem.instance.distanceScale;
     }
 }

@@ -15,6 +15,7 @@ public class PlanetData
     public int tectonics;
     public int weather;
     public int thermal;
+    public int bioHazard;
     public int bioUnits;
     public int minValue;
     public int minVolume;
@@ -28,7 +29,11 @@ public class PlanetData
     public int atmosphere;
     public int lifeChance;
     public int distFromStar;
-    public int bioHazard;
+    public string systemSize;
+    public string surfaceType;
+    public string systemColor;
+    public string colorHexCode;
+
     
     [Header("Config")]
     public bool isMoon = false;
@@ -57,8 +62,5 @@ public class PlanetData
         return new Vector3(scale, scale, scale);
     }
 
-    public float GetPlanetDistance()
-    {
-        return distFromStar * distanceScale;
-    }
+
 }

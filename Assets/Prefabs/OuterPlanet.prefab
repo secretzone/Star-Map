@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1093531090913955386}
   - component: {fileID: 6342107442383116186}
-  - component: {fileID: 4264802128337698150}
   - component: {fileID: 7479086159615076113}
   m_Layer: 0
   m_Name: ClickablePlanet
@@ -86,22 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4264802128337698150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4185050519019250500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67adff18717054482b705dc16b3f5c62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitSpeed: 0.001
-  distance: 27.68
-  target: {fileID: 7365192660919989608}
-  rotationReference: {fileID: 7365192660919989608}
 --- !u!114 &7479086159615076113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91bbf7b355b143a3ae36a6b28b00e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSprites: {fileID: 11400000, guid: 6eeceb2fa1efb46fa8ff5b52705fa930, type: 2}
+  offset: 0
 --- !u!1 &4687248523548339006
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,4 +198,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickablePlanet: {fileID: 7479086159615076113}
-  rotationScript: {fileID: 4264802128337698150}
+  rotationScript: {fileID: 0}
