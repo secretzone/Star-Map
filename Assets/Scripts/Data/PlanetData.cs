@@ -48,19 +48,8 @@ public class PlanetData
     [NonSerialized]
     public List<PlanetData> moons = new List<PlanetData>();
     
-    
-    
-    
     public PlanetData(string name)
     {
         this.name = name;
     }
-
-    public Vector3 GetPlanetSize()
-    {
-        float scale = radius * planetScale;
-        return new Vector3(scale, scale, scale);
-    }
-
-
 }

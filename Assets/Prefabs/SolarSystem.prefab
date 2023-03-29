@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6999831206883672185}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &8096148373227026294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,3 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outerPlanetPrefab: {fileID: 3896976244502527200, guid: c4200c610734a4b868a2e062a9db56f7, type: 3}
   sunPrefab: {fileID: 8604093017344527478, guid: a90a28ce6a41f435db442018f6fc5eba, type: 3}
+  ui: {fileID: 0}
+  solarSystemName: {fileID: 0}
+  solarSystemCoords: {fileID: 0}
+  orbitSpeed: 0.001
+  distanceScale: 0.001
+  rotationOffset: 70

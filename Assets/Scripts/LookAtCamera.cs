@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,33 @@ using UnityEngine;
 public class LookAtCamera : MonoBehaviour
 {
     public Camera targetCamera;
-    void Update()
+
+    private void Start()
     {
-        Vector3 faceDir = new Vector3(targetCamera.transform.forward.x, targetCamera.transform.forward.y, 0);
-        if (targetCamera != null) transform.forward = -faceDir;
+        // targetCamera = Camera.current;
+    }
+
+    // void Update()
+    // {
+    //     targetCamera = Camera.current;
+    //     if (targetCamera != null)
+    //     {
+    //         Vector3 faceDir = new Vector3(targetCamera.transform.forward.x, targetCamera.transform.forward.y, 0);
+    //         // Vector3 faceDir = new Vector3(targetCamera.transform.forward.x, targetCamera.transform.forward.y, 0);
+    //         if (faceDir != Vector3.zero)
+    //         {
+    //             transform.forward = -faceDir;
+    //         }
+    //         // else
+    //         // {
+    //         //     transform.forward = Vector3.one;
+    //         // }
+    //     }
+    //
+    // }
+
+    private void LateUpdate()
+    {
+        transform.forward = new Vector3(Camera.main.transform.forward.x, transform.forward.y, Camera.main.transform.forward.z);
     }
 }

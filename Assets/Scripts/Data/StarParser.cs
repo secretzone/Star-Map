@@ -10,8 +10,7 @@ public class StarParser : MonoBehaviour
     public TextAsset systemsCsv;
     
     public List<ClusterData> starClusters;
-    private bool inProgress = false;
-    
+
     /**
      * These should match the order of the columns in the csv
      */
@@ -54,8 +53,6 @@ public class StarParser : MonoBehaviour
 
     public void ParseSystemData()
     {
-
-        inProgress = true;
         starClusters = new List<ClusterData>();
         var dataset = systemsCsv;
         var dataLines = dataset.text.Split('\n'); // Split also works with simple arguments, no need to pass char[]

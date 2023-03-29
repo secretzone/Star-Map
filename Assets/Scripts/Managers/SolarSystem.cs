@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SolarSystem : MonoBehaviour
 {
@@ -21,9 +22,11 @@ public class SolarSystem : MonoBehaviour
     public TextMeshProUGUI solarSystemName;
     public TextMeshProUGUI solarSystemCoords;
 
-    [Header("Scale")]
-    public float rotationSpeed = 0.001f;
+    [FormerlySerializedAs("rotationSpeed")] [Header("Scale")]
+    public float orbitSpeed = 0.001f;
     public float distanceScale = 0.001f;
+    public float rotationOffset = 70f;
+    public float planetScale = 1f;
     
     // Start is called before the first frame update
     void Start()
@@ -36,8 +39,6 @@ public class SolarSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        
         
         _starData = GameManager.instance.activeSystem;
         _planets = new List<OuterPlanet>();
@@ -58,8 +59,8 @@ public class SolarSystem : MonoBehaviour
         _sun.Initialize(_starData);
         foreach (PlanetData planet in _starData.planets)
         {
-            OuterPlanet p = Instantiate(outerPlanetPrefab, _sun.transform.position, Quaternion.identity,
-                _sun.transform);
+            OuterPlanet p = Instantiate(outerPlanetPrefab, transform.position, Quaternion.identity,
+                transform);
             p.Initialize(planet);
             _planets.Add(p);
         }

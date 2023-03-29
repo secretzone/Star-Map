@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private void Initialize()
     {
         starParser.ParseSystemData();
-        // activeSystem = starParser.starClusters[0].stars[0];
+        activeSystem = starParser.starClusters[0].stars[0];
     }
     
     public void ShowStarMapView()

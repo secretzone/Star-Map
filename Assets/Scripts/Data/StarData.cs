@@ -82,7 +82,15 @@ public class StarData
 
     public string GetFullName()
     {
-        return $"{name} {parentCluster.name}";
+        try
+        {
+            return $"{name} {parentCluster.name}";
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            return "Unknown";
+        }
     }
 }
 
