@@ -52,4 +52,9 @@ public class PlanetData
     {
         this.name = name;
     }
+
+    public Color GetPlanetColor()
+    {
+        return Conversions.ColorFromString(systemColor);
+    }
 }

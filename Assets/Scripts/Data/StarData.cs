@@ -51,15 +51,7 @@ public class StarData
     
     public Color GetStarColor()
     {
-        switch (color.ToLower())
-        {
-            case "red": return Color.red;
-            case "blue": return Color.blue;
-            case "yellow": return Color.yellow;
-            case "green": return Color.green;
-            case "orange": return new Color(255, 165, 0, 1);
-            default: return Color.white;
-        }
+        return Conversions.ColorFromString(color);
     }
 
     public Vector3 GetStarSize()

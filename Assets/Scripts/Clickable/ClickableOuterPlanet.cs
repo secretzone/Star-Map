@@ -14,7 +14,7 @@ public class ClickableOuterPlanet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        
     }
 
     // Update is called once per frame
@@ -28,13 +28,18 @@ public class ClickableOuterPlanet : MonoBehaviour
     public void Initialize(PlanetData planetData, float distance)
     {
         _planetData = planetData;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteSet = GetSpriteSet();
         var transform1 = transform;
         transform1.position = new Vector3(distance, 0, 0);
         _target = transform1.parent;
         _initialized = true;
+        _spriteRenderer.color = _planetData.GetPlanetColor();
     }
 
+
+
+    
     private Sprite[] GetSpriteSet()
     {
         switch (_planetData.systemSize.ToLower())
@@ -45,6 +50,8 @@ public class ClickableOuterPlanet : MonoBehaviour
             default: return rotationSprites.largePlanet;
         }
     }
+    
+    
 
     private void SpriteIndexFromRotation()
     {
