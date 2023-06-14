@@ -24,6 +24,7 @@ public class InnerSystem : MonoBehaviour
     public float distanceScale = 0.001f;
     public float rotationOffset = 70f;
     public float planetScale = 1f;
+    public float moonScale = 0.5f;
     
     void Start()
     {
@@ -52,11 +53,11 @@ public class InnerSystem : MonoBehaviour
         _planet.Initialize(_planetData);
         
         Debug.Log("Spawning moons");
-        foreach (var moon in _planetData.moons)
+        for (int i = 0; i < _planetData.moons.Count; i++)
         {
             Moon m = Instantiate(moonPrefab, transform.position, 
                 Quaternion.identity, transform);
-            m.Initialize(moon);
+            m.Initialize(_planetData.moons[i], i);
             _moons.Add(m);
         }
         Debug.Log("Done spawning");

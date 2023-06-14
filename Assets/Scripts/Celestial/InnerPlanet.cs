@@ -3,7 +3,7 @@ using UnityEngine;
 public class InnerPlanet : MonoBehaviour
 {
     public ClickableInnerPlanet clickableInnerPlanet;
-    private bool _initialized;
+    private bool _initialized = false;
 
     private PlanetData _planetData;
 

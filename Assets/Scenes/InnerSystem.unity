@@ -681,9 +681,10 @@ MonoBehaviour:
   innerSystemName: {fileID: 1789397366}
   innerSystemCoords: {fileID: 1913700681}
   orbitSpeed: 0.001
-  distanceScale: 0.001
+  distanceScale: 1
   rotationOffset: 70
   planetScale: 1
+  moonScale: 0.5
 --- !u!4 &1049036346
 Transform:
   m_ObjectHideFlags: 0

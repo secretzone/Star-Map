@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6342107442383116186}
   - component: {fileID: 7666392744884713018}
   - component: {fileID: 6187441664208803461}
-  - component: {fileID: 1334686583769353306}
+  - component: {fileID: 6223650332414442243}
   m_Layer: 0
   m_Name: ClickablePlanet
   m_TagString: Untagged
@@ -116,16 +116,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.24
---- !u!114 &1334686583769353306
+--- !u!114 &6223650332414442243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4185050519019250500}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94c2d18b933a246c1acf19765c3a8925, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c22ca5c49244f0eb51b9ddf3979ed7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4687248523548339006
@@ -173,3 +173,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefe5e88584448868753909249516233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickableMoon: {fileID: 6223650332414442243}
+  rotationAngle: 0
