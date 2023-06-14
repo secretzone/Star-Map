@@ -1,26 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InnerPlanet : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public ClickableInnerPlanet clickableInnerPlanet;
+    private bool _initialized;
+
     private PlanetData _planetData;
-    
-    void Start()
+
+    // Start is called before the first frame update
+
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 
     public void Initialize(PlanetData planetData)
     {
         _planetData = planetData;
+        clickableInnerPlanet.Initialize(_planetData);
+        _initialized = true;
     }
 }

@@ -5,7 +5,6 @@ using Random = UnityEngine.Random;
 
 public class OuterPlanet : MonoBehaviour
 {
-    private SpriteRenderer _spriteRenderer;
     public PlanetData planetData;
     public ClickableOuterPlanet clickablePlanet;
     private bool _initialized = false;
@@ -16,7 +15,6 @@ public class OuterPlanet : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
