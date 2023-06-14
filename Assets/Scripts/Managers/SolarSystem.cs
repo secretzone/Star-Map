@@ -34,17 +34,16 @@ public class SolarSystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            _starData = GameManager.instance.activeSystem;
+            _planets = new List<OuterPlanet>();
+            solarSystemName.text = _starData.GetFullName();
+            solarSystemCoords.text = _starData.GetPosition2D().ToString();
+            SpawnBodies();
         }
         else
         {
             Destroy(gameObject);
         }
-        
-        _starData = GameManager.instance.activeSystem;
-        _planets = new List<OuterPlanet>();
-        solarSystemName.text = _starData.GetFullName();
-        solarSystemCoords.text = _starData.GetPosition2D().ToString();
-        SpawnBodies();
     }
 
     // Update is called once per frame

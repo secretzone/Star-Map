@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
@@ -25,8 +27,10 @@ public class GameManager : MonoBehaviour
     private bool _inProgress; //If a coroutine is busy
 
     public StarData activeSystem;
-    
-    
+    public PlanetData activeInnerSystem;
+    public PlanetData activeFocusedPlanet;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,19 +65,49 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("StarMap");
     }
+
+    public void ShowSolarSystemView()
+    {
+        if (activeSystem != null)
+        {
+            ShowSolarSystemView(activeSystem);
+        }
+        else
+        {
+            Debug.LogError("No system was set when trying to show the solar system view");
+        }
+    }
     
     public void ShowSolarSystemView(StarData starData)
     {
-
         activeSystem = starData;
         SceneManager.LoadScene("SolarSystem");
     }
-    
 
-    // Update is called once per frame
-    void Update()
+    public void ShowInnerSystemView()
+    {
+        if (activeInnerSystem != null)
+        {
+            ShowInnerSystemView(activeInnerSystem);
+        }
+        else
+        {
+            Debug.LogError("No system was set when trying to show an inner system");
+        }
+    }
+    
+    public void ShowInnerSystemView(PlanetData planetData)
     {
         
+        // if (planetData.moons.Count > 0)
+        // {
+            activeInnerSystem = planetData;
+            SceneManager.LoadScene("InnerSystem");
+        // }
+        // else
+        // {
+        //     activeFocusedPlanet = planetData;
+        //     // SceneManager.LoadScene("PlanetView");
+        // }
     }
-
 }

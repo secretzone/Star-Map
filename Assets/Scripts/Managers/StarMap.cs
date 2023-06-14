@@ -19,12 +19,13 @@ public class StarMap : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            Initialize(GameManager.instance.starParser.starClusters);
         }
         else
         {
             Destroy(this);
         }
-        Initialize(GameManager.instance.starParser.starClusters);
+        
     }
 
     private void Initialize(List<ClusterData> clusters)

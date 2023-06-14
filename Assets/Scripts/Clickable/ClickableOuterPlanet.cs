@@ -63,4 +63,15 @@ public class ClickableOuterPlanet : MonoBehaviour
         index = Limits.Constrain(index, imageCount, 1);
         _spriteRenderer.sprite = _spriteSet[index - 1];
     }
+
+    void OnMouseOver()
+    {
+        //TODO: Show tooltip
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log($"Clicked {_planetData.name}");
+            GameManager.instance.ShowInnerSystemView(_planetData);
+        }  
+    }
 }
