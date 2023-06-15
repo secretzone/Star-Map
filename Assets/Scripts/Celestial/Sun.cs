@@ -1,14 +1,18 @@
+using Data;
 using UnityEngine;
 
-public class Sun : MonoBehaviour
+namespace Celestial
 {
-    public StarData starData;
-    private SpriteRenderer _spriteRenderer;
-
-    public void Initialize(StarData star)
+    public class Sun : MonoBehaviour
     {
-        starData = star;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.color = star.GetStarColor();
+        public StarData starData;
+        private SpriteRenderer _spriteRenderer;
+
+        public void Initialize(StarData star)
+        {
+            starData = star;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.color = star.GetStarColor();
+        }
     }
 }

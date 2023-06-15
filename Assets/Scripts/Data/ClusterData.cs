@@ -1,30 +1,31 @@
-
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
+
 // [Serializable]
-public class ClusterData
+namespace Data
 {
-    public string name;
-    [NonSerialized]
-    public List<StarData> stars = new List<StarData>();
-
-    public ClusterData(string name)
+    public class ClusterData
     {
-        this.name = name;
-    }
+        public string name;
+        [NonSerialized]
+        public List<StarData> stars = new List<StarData>();
 
-    public StarData GetStarByName(string starName)
-    {
-        foreach (StarData star in stars)
+        public ClusterData(string name)
         {
-            if (star.name == starName)
-            {
-                return star;
-            }
+            this.name = name;
         }
 
-        return null;
+        public StarData GetStarByName(string starName)
+        {
+            foreach (StarData star in stars)
+            {
+                if (star.name == starName)
+                {
+                    return star;
+                }
+            }
+
+            return null;
+        }
     }
 }

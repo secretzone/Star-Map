@@ -1,87 +1,88 @@
-
 using System;
 using System.Collections.Generic;
-using DefaultNamespace;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
-[Serializable]
-public class StarData
+using Utility;
+
+namespace Data
 {
-    // public SolarSystem solarSystem; 
-    public string name;
-    public float x;
-    public float y;
-    public string size;
-    public string color;
-    public float distSol; //what is this?
-    public string fleet;
-    [NonSerialized]
-    public List<PlanetData> planets = new List<PlanetData>();
-    [NonSerialized]
-    public ClusterData parentCluster;
-
-    public Vector3 GetPosition()
+    [Serializable]
+    public class StarData
     {
-        return new Vector3(x, y, 0f);
-    }
+        // public SolarSystem solarSystem; 
+        public string name;
+        public float x;
+        public float y;
+        public string size;
+        public string color;
+        public float distSol; //what is this?
+        public string fleet;
+        [NonSerialized]
+        public List<PlanetData> planets = new List<PlanetData>();
+        [NonSerialized]
+        public ClusterData parentCluster;
 
-    public Vector2 GetPosition2D()
-    {
-        return new Vector2(x, y);
-    }
-
-    public StarData(string name)
-    {
-        this.name = name;
-    }
-
-    public PlanetData GetPlanetByName(string planetName)
-    {
-        foreach (PlanetData planet in planets)
+        public Vector3 GetPosition()
         {
-            if (planet.name == planetName)
+            return new Vector3(x, y, 0f);
+        }
+
+        public Vector2 GetPosition2D()
+        {
+            return new Vector2(x, y);
+        }
+
+        public StarData(string name)
+        {
+            this.name = name;
+        }
+
+        public PlanetData GetPlanetByName(string planetName)
+        {
+            foreach (PlanetData planet in planets)
             {
-                return planet;
+                if (planet.name == planetName)
+                {
+                    return planet;
+                }
             }
-        }
 
-        return null;
-    }
+            return null;
+        }
     
-    public Color GetStarColor()
-    {
-        return Conversions.ColorFromString(color);
-    }
-
-    public Vector3 GetStarSize()
-    {
-        float scale;
-        switch (size)
+        public Color GetStarColor()
         {
-            case "dwarf": scale = 2.5f;
-                break;
-            case "giant": scale = 3.5f;
-                break;
-            case "super giant": scale = 5.0f;
-                break;
-            default: scale = 80.0f; //debug to make it obvious
-                break;
+            return Conversions.ColorFromString(color);
         }
 
-        return new Vector3(scale, scale, scale);
-    }
+        public Vector3 GetStarSize()
+        {
+            float scale;
+            switch (size)
+            {
+                case "dwarf": scale = 2.5f;
+                    break;
+                case "giant": scale = 3.5f;
+                    break;
+                case "super giant": scale = 5.0f;
+                    break;
+                default: scale = 80.0f; //debug to make it obvious
+                    break;
+            }
 
-    public string GetFullName()
-    {
-        try
-        {
-            return $"{name} {parentCluster.name}";
+            return new Vector3(scale, scale, scale);
         }
-        catch (Exception e)
+
+        public string GetFullName()
         {
-            Debug.Log(e.Message);
-            return "Unknown";
+            try
+            {
+                return $"{name} {parentCluster.name}";
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
+                return "Unknown";
+            }
         }
     }
 }

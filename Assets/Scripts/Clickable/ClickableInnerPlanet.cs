@@ -1,30 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
-public class ClickableInnerPlanet : MonoBehaviour
+namespace Clickable
 {
-    private PlanetData _planetData;
-    private SpriteRenderer _spriteRenderer;
-    private bool _initialized = false;
-    // Start is called before the first frame update
-    void Start()
+    public class ClickableInnerPlanet : MonoBehaviour
     {
+        private PlanetData _planetData;
+        private SpriteRenderer _spriteRenderer;
+        private bool _initialized = false;
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
-    }
+        }
 
-    public void Initialize(PlanetData planetData)
-    {
-        _planetData = planetData;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.color = _planetData.GetPlanetColor();
+        public void Initialize(PlanetData planetData)
+        {
+            _planetData = planetData;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.color = _planetData.GetPlanetColor();
         
-        _initialized = true;
+            _initialized = true;
+        }
     }
 }
