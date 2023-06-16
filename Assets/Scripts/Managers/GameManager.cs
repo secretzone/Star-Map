@@ -98,7 +98,7 @@ namespace Managers
             // if (planetData.moons.Count > 0)
             // {
             activeInnerSystem = planetData;
-            SceneManager.LoadScene("InnerSystem");
+            SceneManager.LoadScene("PlanetSystem");
             // }
             // else
             // {

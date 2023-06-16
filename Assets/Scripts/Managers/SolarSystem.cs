@@ -18,12 +18,9 @@ namespace Managers
         private List<OrbitPoint> _orbits;
         
 
-        [FormerlySerializedAs("clickableOuterPlanet")] [Header("Prefabs")]
-        // public OuterPlanet outerPlanetPrefab;
-
+        [Header("Prefabs")]
         public ClickableOuterPlanet clickableOuterPlanetPrefab;
         public OrbitPoint orbitPointPrefab;
-        
         public Sun sunPrefab;
 
         [Header("UI")]
@@ -31,12 +28,11 @@ namespace Managers
         public TextMeshProUGUI solarSystemName;
         public TextMeshProUGUI solarSystemCoords;
 
-        [FormerlySerializedAs("rotationSpeed")] [Header("Scale")]
+        [Header("Scale")]
         public float orbitSpeed = 0.001f;
         public float distanceScale = 1f;
         public float rotationOffset = 70f;
-        public float planetScale = 1f;
-        [FormerlySerializedAs("minPlanetDistance")] public float planetSeparationDistance = 1f;
+        public float planetSeparationDistance = 1f;
         public float minDistFromSun = 1f;
     
         // Start is called before the first frame update
@@ -70,10 +66,10 @@ namespace Managers
             _sun.Initialize(_starData);
             
             for (int i = 0; i < _starData.planets.Count; i++)
-            // foreach (PlanetData planet in _starData.planets)
             {
                 OrbitPoint o = Instantiate(orbitPointPrefab, transform.position, Quaternion.identity, transform);
-                ClickableOuterPlanet p = Instantiate(clickableOuterPlanetPrefab, transform.position, Quaternion.identity, o.transform);
+                ClickableOuterPlanet p = Instantiate(clickableOuterPlanetPrefab, transform.position, 
+                    Quaternion.identity, o.transform);
                 o.orbitingBody = p.gameObject;
                 o.orbitSpeed = orbitSpeed;
                 o.distance = ((i + planetSeparationDistance) * distanceScale) + minDistFromSun;
@@ -81,15 +77,13 @@ namespace Managers
                 p.Initialize(_starData.planets[i], o.transform);
                 _planets.Add(p);
                 _orbits.Add(o);
-                
             }
         }
 
-        //Needed? We reset when the scene loads
         private void ClearBodies()
         {
             if (_sun != null) Destroy(_sun.gameObject);
-            if (_planets != null && _planets.Count > 0)
+            if (_orbits != null && _orbits.Count > 0)
             {
                 foreach (OrbitPoint o in _orbits)
                 {

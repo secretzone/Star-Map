@@ -25,7 +25,7 @@ namespace Celestial
     
         public float GetPlanetDistance()
         {
-            return (_order + 1) * InnerSystem.instance.distanceScale; 
+            return (_order + 1) * PlanetSystem.instance.distanceScale; 
         }
 
         private void Update()
