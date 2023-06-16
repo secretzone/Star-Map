@@ -15,6 +15,7 @@ namespace Clickable
         private Transform _target;
         private SpriteRenderer _spriteRenderer;
         private bool _initialized = false;
+        private OrbitPoint _orbit;
     
         private Sprite[] _spriteSet;
         // Start is called before the first frame update
@@ -33,7 +34,8 @@ namespace Clickable
 
         public void Initialize(PlanetData planetData, OrbitPoint orbitPoint)
         {
-            _target = orbitPoint.transform;
+            _orbit = orbitPoint;
+            _target = _orbit.transform;
             _planetData = planetData;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteSet = GetSpriteSet();
