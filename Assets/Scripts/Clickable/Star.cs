@@ -54,5 +54,6 @@ namespace Clickable
             _displaying = false;
             StarMap.instance.HideStarNameText();
         }
+        
     }
 }

@@ -84,6 +84,13 @@ namespace Data
                 return "Unknown";
             }
         }
+        
+        public Sprite GetSunSprite()
+        {
+            String path = $"Bodies/System/star_{size.Replace(" ","")}_{color}";
+            Debug.Log(path);
+            return Resources.Load<Sprite>(path);
+        }
     }
 }
 

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utility;
 
@@ -56,6 +58,23 @@ namespace Data
         public Color GetPlanetColor()
         {
             return Conversions.ColorFromString(systemColor);
+        }
+
+        public Sprite GetInnerPlanetSprite()
+        {
+            Regex rgx = new Regex("[^a-zA-Z]");
+            String pType = type.ToLower();
+            pType = rgx.Replace(pType, "");
+
+            if (pType == "gasgiant")
+            {
+                String c = string.IsNullOrEmpty(systemColor) ? "grey" : systemColor;
+                pType = $"{pType}_{c}";
+            }
+
+            String path = $"Bodies/Planet/{pType}";
+            Debug.Log(path);
+            return Resources.Load<Sprite>(path);
         }
     }
 }

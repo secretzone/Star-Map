@@ -1,3 +1,4 @@
+using System;
 using Data;
 using UnityEngine;
 
@@ -13,9 +14,18 @@ namespace Celestial
         {
             _starData = star;
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.color = star.GetStarColor();
-
+            SetSprite();
+            transform.localScale = _starData.GetStarSize();
             _initialized = true;
+        }
+        
+        public void SetSprite()
+        {
+            var s = _starData.GetSunSprite();
+            if (s != null)
+            {
+                _spriteRenderer.sprite = s;
+            }
         }
     }
 }

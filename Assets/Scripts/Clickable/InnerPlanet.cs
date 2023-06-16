@@ -25,8 +25,21 @@ namespace Clickable
             _planetData = planetData;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.color = _planetData.GetPlanetColor();
-        
+            SetSprite();
             _initialized = true;
+        }
+        
+        public void SetSprite()
+        {
+            Sprite s = _planetData.GetInnerPlanetSprite();
+            if (s != null)
+            {
+                _spriteRenderer.sprite = s;
+            }
+            else
+            {
+                Debug.LogWarning("Sprite was null");
+            }
         }
     }
 }

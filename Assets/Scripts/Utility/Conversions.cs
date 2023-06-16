@@ -7,6 +7,8 @@ namespace Utility
     {
         public static Color ColorFromString(String color)
         {
+            if (string.IsNullOrEmpty(color)) return Color.white;
+            
             switch (color.ToLower())
             {
                 case "red": return Color.red;
