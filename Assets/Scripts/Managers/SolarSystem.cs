@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using Celestial;
+using Clickable;
 using Data;
 using TMPro;
 using UnityEngine;
@@ -12,10 +14,16 @@ namespace Managers
         public static SolarSystem instance;
         private StarData _starData;
         private Sun _sun;
-        private List<OuterPlanet> _planets;
+        private List<ClickableOuterPlanet> _planets;
+        private List<OrbitPoint> _orbits;
+        
 
-        [Header("Prefabs")]
-        public OuterPlanet outerPlanetPrefab;
+        [FormerlySerializedAs("clickableOuterPlanet")] [Header("Prefabs")]
+        // public OuterPlanet outerPlanetPrefab;
+
+        public ClickableOuterPlanet clickableOuterPlanetPrefab;
+        public OrbitPoint orbitPointPrefab;
+        
         public Sun sunPrefab;
 
         [Header("UI")]
@@ -25,9 +33,11 @@ namespace Managers
 
         [FormerlySerializedAs("rotationSpeed")] [Header("Scale")]
         public float orbitSpeed = 0.001f;
-        public float distanceScale = 0.001f;
+        public float distanceScale = 1f;
         public float rotationOffset = 70f;
         public float planetScale = 1f;
+        [FormerlySerializedAs("minPlanetDistance")] public float planetSeparationDistance = 1f;
+        public float minDistFromSun = 1f;
     
         // Start is called before the first frame update
         void Start()
@@ -36,7 +46,8 @@ namespace Managers
             {
                 instance = this;
                 _starData = GameManager.instance.activeSystem;
-                _planets = new List<OuterPlanet>();
+                _planets = new List<ClickableOuterPlanet>();
+                _orbits = new List<OrbitPoint>();
                 solarSystemName.text = _starData.GetFullName();
                 solarSystemCoords.text = _starData.GetPosition2D().ToString();
                 SpawnBodies();
@@ -57,12 +68,20 @@ namespace Managers
             ClearBodies();
             _sun = Instantiate(sunPrefab, transform.position, Quaternion.identity, transform);
             _sun.Initialize(_starData);
-            foreach (PlanetData planet in _starData.planets)
+            
+            for (int i = 0; i < _starData.planets.Count; i++)
+            // foreach (PlanetData planet in _starData.planets)
             {
-                OuterPlanet p = Instantiate(outerPlanetPrefab, transform.position, Quaternion.identity,
-                    transform);
-                p.Initialize(planet);
+                OrbitPoint o = Instantiate(orbitPointPrefab, transform.position, Quaternion.identity, transform);
+                ClickableOuterPlanet p = Instantiate(clickableOuterPlanetPrefab, transform.position, Quaternion.identity, o.transform);
+                o.orbitingBody = p.gameObject;
+                o.orbitSpeed = orbitSpeed;
+                o.distance = ((i + planetSeparationDistance) * distanceScale) + minDistFromSun;
+                // p.transform.localScale *= planetScale;
+                p.Initialize(_starData.planets[i], o.transform);
                 _planets.Add(p);
+                _orbits.Add(o);
+                
             }
         }
 
@@ -72,22 +91,30 @@ namespace Managers
             if (_sun != null) Destroy(_sun.gameObject);
             if (_planets != null && _planets.Count > 0)
             {
-                foreach (OuterPlanet planet in _planets)
+                foreach (OrbitPoint o in _orbits)
                 {
-                    if (planet != null)
+                    if (o.orbitingBody != null)
                     {
-                        Destroy(planet.gameObject);
+                        Destroy(o.orbitingBody.gameObject);
                     }
+                    Destroy(o.gameObject);
                 }
             }
 
-            _planets = new List<OuterPlanet>();
+            _planets = new List<ClickableOuterPlanet>();
+            _orbits = new List<OrbitPoint>();
         }
 
         public void GoToStarMap()
         {
             GameManager.instance.ShowStarMapView();
         }
-    
+
+
+        public void ResetSystem()
+        {
+            ClearBodies();
+            SpawnBodies();
+        }
     }
 }

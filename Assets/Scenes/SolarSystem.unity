@@ -629,15 +629,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2a1efec48954737b53ac5bfa788335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outerPlanetPrefab: {fileID: 3896976244502527200, guid: c4200c610734a4b868a2e062a9db56f7, type: 3}
+  clickableOuterPlanetPrefab: {fileID: 607781273342685776, guid: a1c9f557cffab4f2a81efc5b6d416240, type: 3}
+  orbitPointPrefab: {fileID: 4784139127365442730, guid: a34378c5b67bb470882ec1f84dad70ec, type: 3}
   sunPrefab: {fileID: 8604093017344527478, guid: a90a28ce6a41f435db442018f6fc5eba, type: 3}
   ui: {fileID: 642375776}
   solarSystemName: {fileID: 1378779884}
   solarSystemCoords: {fileID: 999112477}
-  orbitSpeed: 0
-  distanceScale: 0.001
+  orbitSpeed: 1
+  distanceScale: 1
   rotationOffset: -70
-  planetScale: 2
+  planetScale: 1
+  planetSeparationDistance: 1
+  minDistFromSun: 1
 --- !u!4 &658691343
 Transform:
   m_ObjectHideFlags: 0

@@ -29,16 +29,15 @@ namespace Clickable
             SpriteIndexFromRotation();
         }
 
-        public void Initialize(PlanetData planetData, float distance)
+        public void Initialize(PlanetData planetData, Transform orbitPoint)
         {
+            _target = orbitPoint;
             _planetData = planetData;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteSet = GetSpriteSet();
-            var transform1 = transform;
-            transform1.position = new Vector3(distance, 0, 0);
-            _target = transform1.parent;
-            _initialized = true;
             _spriteRenderer.color = _planetData.GetPlanetColor();
+            
+            _initialized = true;
         }
 
 
