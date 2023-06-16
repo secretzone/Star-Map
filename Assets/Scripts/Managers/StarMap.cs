@@ -5,14 +5,15 @@ using Data;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
     public class StarMap : MonoBehaviour
     {
         public static StarMap instance;
-        public ClickableStar clickableStarPrefab;
-        public List<ClickableStar> clickableStars;
+        [FormerlySerializedAs("clickableStarPrefab")] public Star starPrefab;
+        public List<Star> clickableStars;
         public GameObject ui;
         public TextMeshPro starNameText;
         public Transform starNameAnchor;
@@ -38,7 +39,7 @@ namespace Managers
                 foreach (StarData star in cluster.stars)
                 {
                     Vector3 position = new Vector3(star.x, star.y, 0f);
-                    ClickableStar cStar = Instantiate(clickableStarPrefab, position,
+                    Star cStar = Instantiate(starPrefab, position,
                         quaternion.identity, transform);
                     cStar.Initialize(star);
                     clickableStars.Add(cStar);

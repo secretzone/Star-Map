@@ -636,8 +636,7 @@ MonoBehaviour:
   solarSystemCoords: {fileID: 999112477}
   orbitSpeed: 0
   distanceScale: 1
-  rotationOffset: -70
-  planetScale: 1
+  rotationOffset: 0
   planetSeparationDistance: 1
   minDistFromSun: 1
 --- !u!4 &658691343

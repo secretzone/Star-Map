@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Clickable
 {
-    public class ClickableStar : MonoBehaviour
+    public class Star : MonoBehaviour
     {
         [NonSerialized]
         public StarData starData;

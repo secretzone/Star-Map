@@ -14,12 +14,12 @@ namespace Managers
         public static SolarSystem instance;
         private StarData _starData;
         private Sun _sun;
-        private List<ClickableOuterPlanet> _planets;
+        private List<OuterPlanet> _planets;
         private List<OrbitPoint> _orbits;
         
 
-        [Header("Prefabs")]
-        public ClickableOuterPlanet clickableOuterPlanetPrefab;
+        [FormerlySerializedAs("clickableOuterPlanetPrefab")] [Header("Prefabs")]
+        public OuterPlanet outerPlanetPrefab;
         public OrbitPoint orbitPointPrefab;
         public Sun sunPrefab;
 
@@ -31,7 +31,6 @@ namespace Managers
         [Header("Scale")]
         public float orbitSpeed = 0.001f;
         public float distanceScale = 1f;
-        public float rotationOffset = 70f;
         public float planetSeparationDistance = 1f;
         public float minDistFromSun = 1f;
     
@@ -42,7 +41,7 @@ namespace Managers
             {
                 instance = this;
                 _starData = GameManager.instance.activeSystem;
-                _planets = new List<ClickableOuterPlanet>();
+                _planets = new List<OuterPlanet>();
                 _orbits = new List<OrbitPoint>();
                 solarSystemName.text = _starData.GetFullName();
                 solarSystemCoords.text = _starData.GetPosition2D().ToString();
@@ -68,13 +67,13 @@ namespace Managers
             for (int i = 0; i < _starData.planets.Count; i++)
             {
                 OrbitPoint o = Instantiate(orbitPointPrefab, transform.position, Quaternion.identity, transform);
-                ClickableOuterPlanet p = Instantiate(clickableOuterPlanetPrefab, transform.position, 
+                OuterPlanet p = Instantiate(outerPlanetPrefab, transform.position, 
                     Quaternion.identity, o.transform);
                 o.orbitingBody = p.gameObject;
                 o.orbitSpeed = orbitSpeed;
                 o.distance = ((i + planetSeparationDistance) * distanceScale) + minDistFromSun;
                 // p.transform.localScale *= planetScale;
-                p.Initialize(_starData.planets[i], o.transform);
+                p.Initialize(_starData.planets[i], o);
                 _planets.Add(p);
                 _orbits.Add(o);
             }
@@ -95,7 +94,7 @@ namespace Managers
                 }
             }
 
-            _planets = new List<ClickableOuterPlanet>();
+            _planets = new List<OuterPlanet>();
             _orbits = new List<OrbitPoint>();
         }
 

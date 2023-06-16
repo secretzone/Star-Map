@@ -1,3 +1,4 @@
+using Celestial;
 using Data;
 using Managers;
 using SOTemplates;
@@ -6,9 +7,10 @@ using Utility;
 
 namespace Clickable
 {
-    public class ClickableOuterPlanet : MonoBehaviour
+    public class OuterPlanet : MonoBehaviour
     {
         public OuterPlanetSpritesSO rotationSprites;
+        public float rotationOffset = -70;
         private PlanetData _planetData;
         private Transform _target;
         private SpriteRenderer _spriteRenderer;
@@ -29,9 +31,9 @@ namespace Clickable
             SpriteIndexFromRotation();
         }
 
-        public void Initialize(PlanetData planetData, Transform orbitPoint)
+        public void Initialize(PlanetData planetData, OrbitPoint orbitPoint)
         {
-            _target = orbitPoint;
+            _target = orbitPoint.transform;
             _planetData = planetData;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteSet = GetSpriteSet();
@@ -59,7 +61,7 @@ namespace Clickable
         private void SpriteIndexFromRotation()
         {
             int imageCount = _spriteSet.Length;
-            float angle = _target.rotation.eulerAngles.z + SolarSystem.instance.rotationOffset;
+            float angle = _target.rotation.eulerAngles.z + rotationOffset;
             angle = Limits.Constrain(angle, 360f, 0f);
             float degreesPerSprite = 360f / imageCount;
             int index = Mathf.RoundToInt(angle / degreesPerSprite);

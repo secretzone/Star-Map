@@ -12,14 +12,14 @@ namespace Managers
     {
         public static PlanetSystem instance;
         private StarData _starData;
-        private List<ClickableMoon> _moons;
+        private List<Moon> _moons;
         private List<OrbitPoint> _orbits;
-        private ClickableInnerPlanet _planet;
+        private InnerPlanet _planet;
         private PlanetData _planetData;
 
-        [Header("Prefabs")] 
-        public ClickableInnerPlanet clickableInnerPlanetPrefab;
-        public ClickableMoon clickableMoonPrefab;
+        [FormerlySerializedAs("clickableInnerPlanetPrefab")] [Header("Prefabs")] 
+        public InnerPlanet innerPlanetPrefab;
+        [FormerlySerializedAs("clickableMoonPrefab")] public Moon moonPrefab;
         public OrbitPoint orbitPointPrefab;
         
         [Header("UI")]
@@ -30,7 +30,6 @@ namespace Managers
         [Header("Scale")]
         public float orbitSpeed = 0.001f;
         public float distanceScale = 0.001f;
-        public float rotationOffset = 70f;
         public float moonSeparationDistance = 1f;
         public float minDistanceFromPlanet = 1f;
 
@@ -41,7 +40,7 @@ namespace Managers
                 instance = this;
                 _starData = GameManager.instance.activeSystem;
                 _planetData = GameManager.instance.activeInnerSystem;
-                _moons = new List<ClickableMoon>();
+                _moons = new List<Moon>();
                 _orbits = new List<OrbitPoint>();
                 innerSystemName.text = _planetData.name;
                 innerSystemCoords.text = _starData.GetPosition2D().ToString();
@@ -58,19 +57,19 @@ namespace Managers
         {
             ClearBodies();
             Debug.Log("Spawning main planet");
-            _planet = Instantiate(clickableInnerPlanetPrefab, transform.position, Quaternion.identity, transform);
+            _planet = Instantiate(innerPlanetPrefab, transform.position, Quaternion.identity, transform);
             _planet.Initialize(_planetData);
         
             Debug.Log("Spawning moons");
             for (int i = 0; i < _planetData.moons.Count; i++)
             {
                 OrbitPoint o = Instantiate(orbitPointPrefab, transform.position, Quaternion.identity, transform);
-                ClickableMoon m = Instantiate(clickableMoonPrefab, transform.position, 
+                Moon m = Instantiate(moonPrefab, transform.position, 
                     Quaternion.identity, o.transform);
                 o.orbitingBody = m.gameObject;
                 o.orbitSpeed = orbitSpeed;
                 o.distance = ((i + moonSeparationDistance) * distanceScale) + minDistanceFromPlanet;
-                m.Initialize(_planetData.moons[i], i);
+                m.Initialize(_planetData.moons[i], o);
                 _moons.Add(m);
                 _orbits.Add(o);
             }
@@ -92,7 +91,7 @@ namespace Managers
                 }
             }
 
-            _moons = new List<ClickableMoon>();
+            _moons = new List<Moon>();
             _orbits = new List<OrbitPoint>();
         }
 
