@@ -77,7 +77,7 @@ namespace Clickable
         
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log($"Clicked {_planetData.name}");
+                Debug.Log($"Clicked {_planetData.planet}");
                 GameManager.instance.ShowInnerSystemView(_planetData);
             }  
         }

@@ -40,7 +40,7 @@ namespace Data
         {
             foreach (PlanetData planet in planets)
             {
-                if (planet.name == planetName)
+                if (planet.planet == planetName)
                 {
                     return planet;
                 }

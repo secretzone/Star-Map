@@ -30,7 +30,7 @@ namespace Managers
         [Header("Scale")]
         public float orbitSpeed = 0.001f;
         public float distanceScale = 0.001f;
-        public float moonSeparationDistance = 1f;
+        // public float moonSeparationDistance = 1f;
         public float minDistanceFromPlanet = 1f;
 
         void Start()
@@ -42,7 +42,7 @@ namespace Managers
                 _planetData = GameManager.instance.activeInnerSystem;
                 _moons = new List<Moon>();
                 _orbits = new List<OrbitPoint>();
-                innerSystemName.text = _planetData.name;
+                innerSystemName.text = _planetData.planet;
                 innerSystemCoords.text = _starData.GetPosition2D().ToString();
                 SpawnBodies();
             }
@@ -68,7 +68,7 @@ namespace Managers
                     Quaternion.identity, o.transform);
                 o.orbitingBody = m.gameObject;
                 o.orbitSpeed = orbitSpeed;
-                o.distance = ((i + moonSeparationDistance) * distanceScale) + minDistanceFromPlanet;
+                o.distance = ((_planetData.moons[i].GetPosition()) * distanceScale) + minDistanceFromPlanet;
                 m.Initialize(_planetData.moons[i], o);
                 _moons.Add(m);
                 _orbits.Add(o);

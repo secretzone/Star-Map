@@ -31,7 +31,7 @@ namespace Managers
         [Header("Scale")]
         public float orbitSpeed = 0.001f;
         public float distanceScale = 1f;
-        public float planetSeparationDistance = 1f;
+        // public float planetSeparationDistance = 1f;
         public float minDistFromSun = 1f;
     
         // Start is called before the first frame update
@@ -71,7 +71,7 @@ namespace Managers
                     Quaternion.identity, o.transform);
                 o.orbitingBody = p.gameObject;
                 o.orbitSpeed = orbitSpeed;
-                o.distance = ((i + planetSeparationDistance) * distanceScale) + minDistFromSun;
+                o.distance = ((_starData.planets[i].GetPosition()) * distanceScale) + minDistFromSun;
                 // p.transform.localScale *= planetScale;
                 p.Initialize(_starData.planets[i], o);
                 _planets.Add(p);

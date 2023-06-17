@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outerPlanetPrefab: {fileID: 3896976244502527200, guid: c4200c610734a4b868a2e062a9db56f7, type: 3}
+  orbitPointPrefab: {fileID: 0}
   sunPrefab: {fileID: 8604093017344527478, guid: a90a28ce6a41f435db442018f6fc5eba, type: 3}
   ui: {fileID: 0}
   solarSystemName: {fileID: 0}
   solarSystemCoords: {fileID: 0}
   orbitSpeed: 0.001
   distanceScale: 0.001
-  rotationOffset: 70
+  planetSeparationDistance: 1
+  minDistFromSun: 0.2

@@ -674,17 +674,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f936c9f4004e4c4a900f2ec15f59a8a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickableInnerPlanetPrefab: {fileID: 24784813748906504, guid: cd54b5325d24d4e32badf4c3686f86ee, type: 3}
-  clickableMoonPrefab: {fileID: 4655230122780228866, guid: 7daa893c85c234a8595bc73c52ba464d, type: 3}
+  innerPlanetPrefab: {fileID: 24784813748906504, guid: cd54b5325d24d4e32badf4c3686f86ee, type: 3}
+  moonPrefab: {fileID: 4655230122780228866, guid: 7daa893c85c234a8595bc73c52ba464d, type: 3}
   orbitPointPrefab: {fileID: 4784139127365442730, guid: a34378c5b67bb470882ec1f84dad70ec, type: 3}
   ui: {fileID: 508616215}
   innerSystemName: {fileID: 1789397366}
   innerSystemCoords: {fileID: 1913700681}
-  orbitSpeed: 0.001
+  orbitSpeed: 0
   distanceScale: 1
-  rotationOffset: 70
-  moonSeparationDistance: 1
-  minDistanceFromPlanet: 1
+  minDistanceFromPlanet: 0
 --- !u!4 &1049036346
 Transform:
   m_ObjectHideFlags: 0

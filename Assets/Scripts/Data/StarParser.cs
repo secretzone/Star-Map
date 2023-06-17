@@ -143,12 +143,12 @@ namespace Data
                     List<PlanetData> parentPlanets = new List<PlanetData>();
                     foreach (PlanetData planet in star.planets)
                     {
-                        if (planet.name.Contains("-")) //I am a moon
+                        if (planet.planet.Contains("-")) //I am a moon
                         {
-                            PlanetData parent = star.GetPlanetByName(planet.name.Split("-")[0]);
+                            PlanetData parent = star.GetPlanetByName(planet.planet.Split("-")[0]);
                             if (parent == null)
                             {
-                                Debug.Log($"Could not find parent for {planet.name}");
+                                Debug.Log($"Could not find parent for {planet.planet}");
                             }
                             else
                             {
