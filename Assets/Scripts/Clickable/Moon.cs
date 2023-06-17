@@ -1,6 +1,7 @@
 
 using Celestial;
 using Data;
+using Managers;
 using UnityEngine;
 
 namespace Clickable
@@ -31,6 +32,18 @@ namespace Clickable
             {
                 _spriteRenderer.sprite = s;
             }
+        }
+        
+        void OnMouseOver()
+        {
+            if (!_initialized) return;
+            //TODO: Show tooltip
+        
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log($"Clicked {_planetData.planet}");
+                GameManager.instance.ShowPlanetDetailsView(_planetData);
+            }  
         }
     }
 }

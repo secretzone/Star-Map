@@ -1,11 +1,11 @@
 using Data;
 using UnityEngine;
 
-namespace Celestial
+namespace Managers
 {
-    public class DetailsPlanet : MonoBehaviour
+    public class PlanetDetails : MonoBehaviour
     {
-        public PlanetData planetData;
+        private PlanetData _planetData;
         // Start is called before the first frame update
         void Start()
         {
@@ -20,7 +20,12 @@ namespace Celestial
 
         public void Initialize(PlanetData data)
         {
-            this.planetData = data;
+            _planetData = data;
+        }
+
+        public void GoToPlanetSystemView()
+        {
+            GameManager.instance.ShowPlanetSystemView();
         }
     }
 }

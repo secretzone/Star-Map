@@ -1,4 +1,5 @@
 using Data;
+using Managers;
 using UnityEngine;
 
 namespace Clickable
@@ -40,6 +41,17 @@ namespace Clickable
             {
                 Debug.LogWarning("Sprite was null");
             }
+        }
+        
+        void OnMouseOver()
+        {
+            //TODO: Show tooltip
+        
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log($"Clicked {_planetData.planet}");
+                GameManager.instance.ShowPlanetDetailsView(_planetData);
+            }  
         }
     }
 }

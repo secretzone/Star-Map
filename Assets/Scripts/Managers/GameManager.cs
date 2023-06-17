@@ -80,11 +80,11 @@ namespace Managers
             SceneManager.LoadScene("SolarSystem");
         }
 
-        public void ShowInnerSystemView()
+        public void ShowPlanetSystemView()
         {
             if (activeInnerSystem != null)
             {
-                ShowInnerSystemView(activeInnerSystem);
+                ShowPlanetSystemView(activeInnerSystem);
             }
             else
             {
@@ -92,19 +92,29 @@ namespace Managers
             }
         }
     
-        public void ShowInnerSystemView(PlanetData planetData)
+        public void ShowPlanetSystemView(PlanetData planetData)
         {
-        
-            // if (planetData.moons.Count > 0)
-            // {
             activeInnerSystem = planetData;
             SceneManager.LoadScene("PlanetSystem");
-            // }
-            // else
-            // {
-            //     activeFocusedPlanet = planetData;
-            //     // SceneManager.LoadScene("PlanetView");
-            // }
+        }
+
+
+        public void ShowPlanetDetailsView()
+        {
+            if (activeFocusedPlanet != null)
+            {
+                ShowPlanetDetailsView(activeFocusedPlanet);
+            }
+            else
+            {
+                Debug.LogError("No system was set when trying to show the planet details view");
+            }
+        }
+        
+        public void ShowPlanetDetailsView(PlanetData planetData)
+        {
+            activeFocusedPlanet = planetData;
+            SceneManager.LoadScene("PlanetDetails");
         }
     }
 }
