@@ -114,7 +114,7 @@ namespace Managers
         public void ShowPlanetDetailsView(PlanetData planetData)
         {
             activeFocusedPlanet = planetData;
-            SceneManager.LoadScene("PlanetDetails");
+            SceneManager.LoadScene("WorldSystem");
         }
     }
 }

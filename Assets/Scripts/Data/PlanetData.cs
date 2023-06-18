@@ -72,11 +72,16 @@ namespace Data
             return Conversions.ColorFromString(systemColor);
         }
 
-        public Sprite GetInnerPlanetSprite()
+        public String GetType()
         {
             Regex rgx = new Regex("[^a-zA-Z]");
             String pType = type.ToLower();
-            pType = rgx.Replace(pType, "");
+            return rgx.Replace(pType, "");
+        }
+
+        public Sprite GetInnerPlanetSprite()
+        {
+            String pType = GetType();
 
             if (pType == "gasgiant")
             {
@@ -85,6 +90,14 @@ namespace Data
             }
 
             String path = $"Bodies/Planet/{pType}";
+            Debug.Log(path);
+            return Resources.Load<Sprite>(path);
+        }
+
+        public Sprite GetWorldSprite()
+        {
+            String pType = GetType();
+            String path = $"Worlds/{pType}_world_00";
             Debug.Log(path);
             return Resources.Load<Sprite>(path);
         }

@@ -18,7 +18,7 @@ namespace Managers
         private List<OrbitPoint> _orbits;
         
 
-        [FormerlySerializedAs("clickableOuterPlanetPrefab")] [Header("Prefabs")]
+        [Header("Prefabs")]
         public OuterPlanet outerPlanetPrefab;
         public OrbitPoint orbitPointPrefab;
         public Sun sunPrefab;
