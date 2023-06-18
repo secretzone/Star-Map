@@ -35,6 +35,7 @@ namespace Data
         public string surfaceType;
         public string systemColor;
         public string colorHexCode;
+        public int variant = 0;
 
         Dictionary<string, int> _numerals = new Dictionary<string, int>
         {
@@ -97,9 +98,9 @@ namespace Data
         public Sprite GetWorldSprite()
         {
             String pType = GetType();
-            String path = $"Worlds/{pType}_world_00";
+            String path = $"Worlds/{pType}_4x4";
             Debug.Log(path);
-            return Resources.Load<Sprite>(path);
+            return Resources.LoadAll<Sprite>(path)[variant];
         }
 
         public int GetPosition()
