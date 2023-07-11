@@ -36,6 +36,8 @@ namespace Data
         public string systemColor;
         public string colorHexCode;
         public int variant = 0;
+        public int orbitOrder;
+        public string bodyType;
 
         Dictionary<string, int> _numerals = new Dictionary<string, int>
         {
@@ -105,18 +107,19 @@ namespace Data
 
         public int GetPosition()
         {
-            String[] t = planet.Split("-");
-            int order = 0;
-            if (isMoon)
-            {
-                _alphas.TryGetValue(t[1], out order);
-            }
-            else
-            {
-                _numerals.TryGetValue(t[0], out order);
-            }
-
-            return order;
+            return orbitOrder;
+            // String[] t = planet.Split("-");
+            // int order = 0;
+            // if (isMoon)
+            // {
+            //     _alphas.TryGetValue(t[1], out order);
+            // }
+            // else
+            // {
+            //     _numerals.TryGetValue(t[0], out order);
+            // }
+            //
+            // return order;
         }
     }
 }

@@ -48,7 +48,9 @@ namespace Data
             SystemSize,
             SurfaceType,
             SystemColor,
-            ColorHexCode
+            ColorHexCode,
+            OrbitOrder,
+            BodyType
         }
 
         public void ParseSystemData()
@@ -118,7 +120,9 @@ namespace Data
                         planetData.surfaceType = data[(int) Columns.SurfaceType];
                         planetData.systemColor = data[(int) Columns.SystemColor];
                         planetData.colorHexCode = data[(int) Columns.ColorHexCode];
-                    
+                        planetData.orbitOrder = Convert.ToInt32(data[(int) Columns.OrbitOrder]);
+                        planetData.bodyType = data[(int) Columns.BodyType];
+                        
                         planetData.parentStar = starData;
                         starData.planets.Add(planetData);
                     }

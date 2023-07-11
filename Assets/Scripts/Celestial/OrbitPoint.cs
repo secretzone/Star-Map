@@ -35,10 +35,10 @@ namespace Celestial
          _initialized = true;
       }
 
-      public void Initialize(float distance, float initialRotation)
-      {
-         Initialize(orbitingBody, distance, initialRotation);
-      }
+      // public void Initialize(float distance, float initialRotation)
+      // {
+      //    Initialize(orbitingBody, distance, initialRotation);
+      // }
       
       private void Update()
       {

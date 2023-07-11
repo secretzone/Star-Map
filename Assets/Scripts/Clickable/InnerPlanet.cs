@@ -25,7 +25,7 @@ namespace Clickable
         {
             _planetData = planetData;
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.color = _planetData.GetPlanetColor();
+            // _spriteRenderer.color = _planetData.GetPlanetColor();
             SetSprite();
             _initialized = true;
         }
