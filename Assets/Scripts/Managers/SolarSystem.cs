@@ -56,7 +56,10 @@ namespace Managers
         // Update is called once per frame
         void Update()
         {
-        
+            if(Input.GetMouseButtonDown(1))
+            {
+                GoToStarMap();
+            }
         }
         private void SpawnBodies()
         {
@@ -102,7 +105,6 @@ namespace Managers
         {
             GameManager.instance.ShowStarMapView();
         }
-
 
         public void ResetSystem()
         {

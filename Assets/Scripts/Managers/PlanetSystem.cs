@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Celestial;
 using Clickable;
@@ -100,7 +101,15 @@ namespace Managers
             Debug.Log("Going back");
             GameManager.instance.ShowSolarSystemView(_starData);
         }
-        
+
+        private void Update()
+        {
+            if(Input.GetMouseButtonDown(1))
+            {
+                GoToSystemView();
+            }
+        }
+
         public void ResetSystem()
         {
             ClearBodies();

@@ -29,9 +29,12 @@ namespace Managers
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-        
+            if(Input.GetMouseButtonDown(1))
+            {
+                GoToPlanetSystemView();
+            }
         }
 
         public void SpawnBodies()
