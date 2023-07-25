@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Behavior
 {
@@ -9,36 +11,42 @@ namespace Behavior
 
         private Camera _camera;
         private bool _inProgress = false;
-        public float zoomedInSize;
-        public float zoomedOutSize;
+        public float zoomMax;
+        public float zoomMin;
         public float zoomSpeed = 10;
+        public float zoomPerScroll = 50;
 
+        private float zoom ;
+        Vector3 newPosition;
 
         // Start is called before the first frame update
         void Start()
         {
             _camera = GetComponent<Camera>();
             _initialPosition = _camera.WorldToScreenPoint(transform.position);
+            zoomMax = _camera.orthographicSize;
+            zoom = zoomMax;
         }
     
 
         public void ResetPosition()
         {
             transform.position = _initialPosition;
+            _camera.orthographicSize = zoomMax;
         }
 
         // public void ZoomInToStar(Star star)
         // {
         //     Debug.Log("Zooming in");
         //     transform.position = star.transform.position;
-        //     _camera.orthographicSize = zoomedInSize;
+        //     _camera.orthographicSize = zoomMax;
         // }
 
         // public void ZoomOutToMap()
         // {
         //     Debug.Log("Zooming out");
         //     ResetPosition();
-        //     _camera.orthographicSize = zoomedOutSize;
+        //     _camera.orthographicSize = zoomMax;
         // }
 
         private IEnumerator ChangeOrtho(float targetZoom)
@@ -52,7 +60,7 @@ namespace Behavior
             while (!Mathf.Approximately(targetZoom, _camera.orthographicSize))
             {
                 // targetZoom -= Input.mouseScrollDelta.y * sensitivity;
-                targetZoom = Mathf.Clamp(targetZoom, zoomedInSize, zoomedOutSize);
+                targetZoom = Mathf.Clamp(targetZoom, zoomMin, zoomMax);
                 float newSize = Mathf.MoveTowards(_camera.orthographicSize, targetZoom, zoomSpeed * Time.deltaTime);
                 _camera.orthographicSize = newSize;
                 yield break;
@@ -61,10 +69,27 @@ namespace Behavior
         }
 
 
+        void ProcessCameraZoom()
+        {
+            if (Input.GetAxis("Mouse ScrollWheel") > 0 && zoom > zoomMin)
+            {
+                zoom -= zoomSpeed;
+                Camera.main.orthographicSize = zoom;
+                // newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                // transform.position = Vector3.Lerp(transform.position, newPosition, 0.1F);
+            }
+
+            if (Input.GetAxis("Mouse ScrollWheel") < 0 && zoom < zoomMax)
+            {
+                zoom += zoomSpeed;
+                Camera.main.orthographicSize = zoom;
+            }
+        }
+
         // Update is called once per frame
         void Update()
         {
-        
+            ProcessCameraZoom();
         }
     }
 }

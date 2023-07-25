@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff87550c8fc3428396e4c6b2355be679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickableStarPrefab: {fileID: 1391748012601939869, guid: e88722ed142c74277a2f77e9aa133d34, type: 3}
+  starPrefab: {fileID: 1391748012601939869, guid: e88722ed142c74277a2f77e9aa133d34, type: 3}
   clickableStars: []
   ui: {fileID: 1837525365}
   starNameText: {fileID: 1835295665}
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.7
+  m_fontSize: 15.3
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.5
+  m_fontSize: 16.55
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 1724230478}
   - component: {fileID: 1724230477}
   - component: {fileID: 1724230476}
+  - component: {fileID: 1724230479}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -704,6 +705,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1724230479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724230475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206a3e0e848964addb1540f22018386f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomMax: 530
+  zoomMin: 50
+  zoomSpeed: 500
+  zoomPerScroll: 300
 --- !u!1 &1835295663
 GameObject:
   m_ObjectHideFlags: 0

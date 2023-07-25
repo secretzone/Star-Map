@@ -6,6 +6,8 @@ using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
+using Slider = UnityEngine.UI.Slider;
 
 namespace Managers
 {
@@ -27,9 +29,12 @@ namespace Managers
         public GameObject ui;
         public TextMeshProUGUI solarSystemName;
         public TextMeshProUGUI solarSystemCoords;
+        public Slider slider;
 
         [Header("Scale")]
         public float orbitSpeed = 0.001f;
+
+        public float sliderScale = 0.001f;
         public float distanceScale = 1f;
         // public float planetSeparationDistance = 1f;
         public float minDistFromSun = 1f;
@@ -59,6 +64,15 @@ namespace Managers
             if(Input.GetMouseButtonDown(1))
             {
                 GoToStarMap();
+            }
+        }
+
+        public void UpdateOrbitSpeed()
+        {
+            orbitSpeed = slider.value * sliderScale;
+            foreach (OrbitPoint o in _orbits)
+            {
+                o.orbitSpeed = orbitSpeed;
             }
         }
         private void SpawnBodies()
@@ -110,6 +124,9 @@ namespace Managers
         {
             ClearBodies();
             SpawnBodies();
+            slider.value = 0;
+            orbitSpeed = 0;
+            UpdateOrbitSpeed();
         }
     }
 }
