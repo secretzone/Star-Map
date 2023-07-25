@@ -7,6 +7,7 @@ namespace Behavior
 {
     public class CameraBehavior : MonoBehaviour
     {
+        [SerializeField]
         private Vector3 _initialPosition;
 
         private Camera _camera;
@@ -23,7 +24,7 @@ namespace Behavior
         void Start()
         {
             _camera = GetComponent<Camera>();
-            _initialPosition = _camera.WorldToScreenPoint(transform.position);
+            _initialPosition = transform.position;//_camera.WorldToScreenPoint(transform.position);
             zoomMax = _camera.orthographicSize;
             zoom = zoomMax;
         }
@@ -73,16 +74,18 @@ namespace Behavior
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && zoom > zoomMin)
             {
+                newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 zoom -= zoomSpeed;
                 Camera.main.orthographicSize = zoom;
-                // newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                // transform.position = Vector3.Lerp(transform.position, newPosition, 0.1F);
+                
+                transform.position = newPosition; //Vector3.Lerp(transform.position, newPosition, 0.1F);
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") < 0 && zoom < zoomMax)
             {
                 zoom += zoomSpeed;
                 Camera.main.orthographicSize = zoom;
+                transform.position = _initialPosition;
             }
         }
 

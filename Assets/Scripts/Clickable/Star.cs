@@ -37,14 +37,12 @@ namespace Clickable
                 StarMap.instance.ShowStarNameText($"{_starData.GetFullName()}", 
                     _starData.GetPosition(), 
                     _starData.GetStarColor());
-            
             }
             if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log($"Clicked {_starData.name}");
                 GameManager.instance.ShowSolarSystemView(_starData);
-            }     
-        
+            }
         }
     
         private void OnMouseExit()
@@ -54,6 +52,5 @@ namespace Clickable
             _displaying = false;
             StarMap.instance.HideStarNameText();
         }
-        
     }
 }
